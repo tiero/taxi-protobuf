@@ -29,8 +29,12 @@ service Taxi {
 
 message TopupRequest {}
 message TopupReply {}
-message GetTopupRequest {}
-message GetTopupReply {}
+message GetTopupRequest {
+  string order_id = 1;
+}
+message GetTopupReply {
+  Order order = 1;
+}
 message TopupWithKeyRequest {}
 message TopupWithKeyReply {}
 message GetAssetEstimateRequest {

@@ -29,8 +29,8 @@ service Taxi {
 
 message TopupRequest {}
 message TopupReply {}
-message GetTopupRequest {}
-message GetTopupReply {}
+message GetTopupRequest { string order_id = 1; }
+message GetTopupReply { Order order = 1; }
 message TopupWithKeyRequest {}
 message TopupWithKeyReply {}
 message GetAssetEstimateRequest {
@@ -38,7 +38,7 @@ message GetAssetEstimateRequest {
   string asset_hash = 2;
 }
 message GetAssetEstimateReply {
-  Breakdown breakdown = 1; 
+  Breakdown breakdown = 1;
   uint64 asset_amount = 2;
   string asset_hash = 3;
 }
@@ -59,9 +59,7 @@ message Unsigned {
   string pset = 1;
   float sat_per_byte = 2; // default 0.1
 }
-message PartialWithFees {
-  string pset = 1;
-}
+message PartialWithFees { string pset = 1; }
 message Order {
   string order_id = 1;
   enum Status {
@@ -73,14 +71,14 @@ message Order {
   Unsigned unsigned = 4;
   Breakdown breakdown = 5;
   // This is the pset with fees
-  PartialWithFees partial =  6;
+  PartialWithFees partial = 6;
   int64 created_at = 7;
   enum PaymentMethod {
     PAY_PER_USE = 0;
     API_KEY = 1;
     ASSET = 2;
   }
-  PaymentMethod method = 8; 
+  PaymentMethod method = 8;
 }
 message Breakdown {
   uint64 size = 1;

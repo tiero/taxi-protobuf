@@ -41,10 +41,12 @@ message GetAssetEstimateReply {
   Breakdown breakdown = 1;
   uint64 asset_amount = 2;
   string asset_hash = 3;
+  string order_id = 4;
 }
 message TopupWithAssetRequest {
   Unsigned unsigned = 1;
   string asset_hash = 2;
+  string order_id = 3;
 }
 message TopupWithAssetReply {
   Order order = 1;

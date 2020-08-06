@@ -81,6 +81,7 @@ message Order {
     ASSET = 2;
   }
   PaymentMethod method = 8;
+  uint64 asset_amount = 9;
 }
 message Breakdown {
   uint64 size = 1;

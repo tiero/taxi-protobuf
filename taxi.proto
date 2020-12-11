@@ -26,6 +26,7 @@ message ListAssetsReply {
 message TopupWithAssetRequest {
   string asset_hash = 1; // asset hash to be used for payout
   uint64 fee_amount = 2; // amount in satoshis of bitcoin needed to cover the fees. It's up to the client to estimate and ask the precise amount
+  uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
 }
 message TopupWithAssetReply {
   string topup_id = 1; //random identifier of the currer topup

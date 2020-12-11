@@ -31,7 +31,7 @@ message TopupWithAssetReply {
   string topup_id = 1; //random identifier of the currer topup
   string partial = 2; // PSET signed with SIGHASH_ALL | ANYONECANPAY
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
-  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout
+  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
   int32 basis_point = 5; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
   uint64 expiry = 6; // the unix timestamp after wich the locked LBTC input will provably be double-spent
 }
@@ -50,7 +50,7 @@ message ListTopupsReply {
   Status status = 2;
   string partial = 3; // PSET signed with SIGHASH_ALL | ANYONECANPAY
   string asset_hash = 4; // the asset hash used as payout for bitcoin fees
-  uint64 asset_amount = 5; // the asset denominated amount expressed in satoshis to be used as payout
+  uint64 asset_amount = 5; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
   float asset_price = 6; // the price of bitcoin expressed in asset
   uint64 fee_amount = 7; // amount in satoshis of bitcoin needed to cover the fees
   int32 basis_point = 8; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees

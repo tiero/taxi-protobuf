@@ -92,7 +92,7 @@
 | status | [ListTopupsReply.Status](#ListTopupsReply.Status) |  |  |
 | partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
 | asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
-| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout |
+| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
 | asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
 | fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees |
 | basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
@@ -147,7 +147,7 @@
 | topup_id | [string](#string) |  | random identifier of the currer topup |
 | partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
 | asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
-| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout |
+| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
 | basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
 | expiry | [uint64](#uint64) |  | the unix timestamp after wich the locked LBTC input will provably be double-spent |
 

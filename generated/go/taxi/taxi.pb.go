@@ -222,7 +222,7 @@ type TopupWithAssetReply struct {
 	TopupId     string `protobuf:"bytes,1,opt,name=topup_id,json=topupId,proto3" json:"topup_id,omitempty"`              //random identifier of the currer topup
 	Partial     string `protobuf:"bytes,2,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_ALL | ANYONECANPAY
 	AssetHash   string `protobuf:"bytes,3,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`        // the asset hash used as payout for bitcoin fees
-	AssetAmount uint64 `protobuf:"varint,4,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout
+	AssetAmount uint64 `protobuf:"varint,4,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
 	BasisPoint  int32  `protobuf:"varint,5,opt,name=basis_point,json=basisPoint,proto3" json:"basis_point,omitempty"`    // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
 	Expiry      uint64 `protobuf:"varint,6,opt,name=expiry,proto3" json:"expiry,omitempty"`                              // the unix timestamp after wich the locked LBTC input will provably be double-spent
 }
@@ -357,7 +357,7 @@ type ListTopupsReply struct {
 	Status      ListTopupsReply_Status `protobuf:"varint,2,opt,name=status,proto3,enum=ListTopupsReply_Status" json:"status,omitempty"`
 	Partial     string                 `protobuf:"bytes,3,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_ALL | ANYONECANPAY
 	AssetHash   string                 `protobuf:"bytes,4,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`        // the asset hash used as payout for bitcoin fees
-	AssetAmount uint64                 `protobuf:"varint,5,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout
+	AssetAmount uint64                 `protobuf:"varint,5,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
 	AssetPrice  float32                `protobuf:"fixed32,6,opt,name=asset_price,json=assetPrice,proto3" json:"asset_price,omitempty"`   // the price of bitcoin expressed in asset
 	FeeAmount   uint64                 `protobuf:"varint,7,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`       // amount in satoshis of bitcoin needed to cover the fees
 	BasisPoint  int32                  `protobuf:"varint,8,opt,name=basis_point,json=basisPoint,proto3" json:"basis_point,omitempty"`    // the spread expressed in basis point on top the amount needed to repay for bitcoin fees

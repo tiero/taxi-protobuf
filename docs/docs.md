@@ -4,24 +4,19 @@
 ## Table of Contents
 
 - [taxi.proto](#taxi.proto)
-    - [Breakdown](#.Breakdown)
-    - [GetAssetEstimateReply](#.GetAssetEstimateReply)
-    - [GetAssetEstimateRequest](#.GetAssetEstimateRequest)
-    - [GetTopupReply](#.GetTopupReply)
-    - [GetTopupRequest](#.GetTopupRequest)
-    - [Order](#.Order)
-    - [PartialWithFees](#.PartialWithFees)
-    - [TopupReply](#.TopupReply)
-    - [TopupRequest](#.TopupRequest)
+    - [ChangeSpreadReply](#.ChangeSpreadReply)
+    - [ChangeSpreadRequest](#.ChangeSpreadRequest)
+    - [ListAssetsReply](#.ListAssetsReply)
+    - [ListAssetsRequest](#.ListAssetsRequest)
+    - [ListTopupsReply](#.ListTopupsReply)
+    - [ListTopupsRequest](#.ListTopupsRequest)
+    - [Timestamps](#.Timestamps)
     - [TopupWithAssetReply](#.TopupWithAssetReply)
     - [TopupWithAssetRequest](#.TopupWithAssetRequest)
-    - [TopupWithKeyReply](#.TopupWithKeyReply)
-    - [TopupWithKeyRequest](#.TopupWithKeyRequest)
-    - [Unsigned](#.Unsigned)
   
-    - [Order.PaymentMethod](#.Order.PaymentMethod)
-    - [Order.Status](#.Order.Status)
+    - [ListTopupsReply.Status](#.ListTopupsReply.Status)
   
+    - [Admin](#.Admin)
     - [Taxi](#.Taxi)
   
 - [Scalar Value Types](#scalar-value-types)
@@ -35,142 +30,106 @@
 
 
 
-<a name=".Breakdown"></a>
+<a name=".ChangeSpreadReply"></a>
 
-### Breakdown
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| size | [uint64](#uint64) |  |  |
-| sat_per_byte | [float](#float) |  | default 0.1 |
-| fee | [uint64](#uint64) |  |  |
-| rate | [float](#float) |  |  |
-| spread | [uint64](#uint64) |  |  |
-| total | [uint64](#uint64) |  |  |
+### ChangeSpreadReply
 
 
 
 
 
 
-<a name=".GetAssetEstimateReply"></a>
 
-### GetAssetEstimateReply
+<a name=".ChangeSpreadRequest"></a>
+
+### ChangeSpreadRequest
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| breakdown | [Breakdown](#Breakdown) |  |  |
-| asset_amount | [uint64](#uint64) |  |  |
-| asset_hash | [string](#string) |  |  |
-| order_id | [string](#string) |  |  |
+| basis_point | [int32](#int32) |  |  |
 
 
 
 
 
 
-<a name=".GetAssetEstimateRequest"></a>
+<a name=".ListAssetsReply"></a>
 
-### GetAssetEstimateRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| unsigned | [Unsigned](#Unsigned) |  |  |
-| asset_hash | [string](#string) |  |  |
-
-
-
-
-
-
-<a name=".GetTopupReply"></a>
-
-### GetTopupReply
+### ListAssetsReply
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| order | [Order](#Order) |  |  |
+| asset_hash | [string](#string) | repeated | asset hash accepted as payout |
 
 
 
 
 
 
-<a name=".GetTopupRequest"></a>
+<a name=".ListAssetsRequest"></a>
 
-### GetTopupRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| order_id | [string](#string) |  |  |
+### ListAssetsRequest
 
 
 
 
 
 
-<a name=".Order"></a>
 
-### Order
+<a name=".ListTopupsReply"></a>
+
+### ListTopupsReply
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| order_id | [string](#string) |  |  |
-| status | [Order.Status](#Order.Status) |  |  |
-| is_completed | [bool](#bool) |  |  |
-| unsigned | [Unsigned](#Unsigned) |  |  |
-| breakdown | [Breakdown](#Breakdown) |  |  |
-| partial | [PartialWithFees](#PartialWithFees) |  | This is the pset with fees |
-| created_at | [int64](#int64) |  |  |
-| method | [Order.PaymentMethod](#Order.PaymentMethod) |  |  |
-| asset_amount | [uint64](#uint64) |  |  |
+| topup_id | [string](#string) |  | random identifier of the currer topup |
+| status | [ListTopupsReply.Status](#ListTopupsReply.Status) |  |  |
+| partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
+| asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
+| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout |
+| asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
+| fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees |
+| basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
+| times | [Timestamps](#Timestamps) |  | the timestamps of each status change |
 
 
 
 
 
 
-<a name=".PartialWithFees"></a>
+<a name=".ListTopupsRequest"></a>
 
-### PartialWithFees
+### ListTopupsRequest
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| pset | [string](#string) |  |  |
+| asset_hash | [string](#string) |  | the asset hash to filetr the topups. If empty, all topups of all assets will be returned |
 
 
 
 
 
 
-<a name=".TopupReply"></a>
+<a name=".Timestamps"></a>
 
-### TopupReply
-
-
+### Timestamps
 
 
 
-
-
-<a name=".TopupRequest"></a>
-
-### TopupRequest
-
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requested_at | [uint64](#uint64) |  | the unix timestamp of when the taxi received the request of a topup from a client |
+| completed_at | [uint64](#uint64) |  | the unix timestamp of when the taxi completed the topup and responded to client |
+| settled_at | [uint64](#uint64) |  | the unix timestamp of the block in wich the topup is included in the chain. |
+| expired_at | [uint64](#uint64) |  | the unix timestamp after wich the locked bitcoin input could have been double-spent (if any) |
 
 
 
@@ -185,10 +144,12 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| order | [Order](#Order) |  |  |
-| asset_amount | [uint64](#uint64) |  |  |
-| asset_hash | [string](#string) |  |  |
-| expiry | [uint64](#uint64) |  |  |
+| topup_id | [string](#string) |  | random identifier of the currer topup |
+| partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
+| asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
+| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout |
+| basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
+| expiry | [uint64](#uint64) |  | the unix timestamp after wich the locked LBTC input will provably be double-spent |
 
 
 
@@ -203,45 +164,8 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| unsigned | [Unsigned](#Unsigned) |  |  |
-| asset_hash | [string](#string) |  |  |
-| order_id | [string](#string) |  |  |
-
-
-
-
-
-
-<a name=".TopupWithKeyReply"></a>
-
-### TopupWithKeyReply
-
-
-
-
-
-
-
-<a name=".TopupWithKeyRequest"></a>
-
-### TopupWithKeyRequest
-
-
-
-
-
-
-
-<a name=".Unsigned"></a>
-
-### Unsigned
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| pset | [string](#string) |  |  |
-| sat_per_byte | [float](#float) |  | default 0.1 |
+| asset_hash | [string](#string) |  | asset hash to be used for payout |
+| fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees. It&#39;s up to the client to estimate and ask the precise amount |
 
 
 
@@ -250,33 +174,32 @@
  
 
 
-<a name=".Order.PaymentMethod"></a>
+<a name=".ListTopupsReply.Status"></a>
 
-### Order.PaymentMethod
+### ListTopupsReply.Status
 
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PAY_PER_USE | 0 |  |
-| API_KEY | 1 |  |
-| ASSET | 2 |  |
-
-
-
-<a name=".Order.Status"></a>
-
-### Order.Status
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| UNPAID | 0 |  |
-| PAID | 1 |  |
+| REQUESTED | 0 |  |
+| COMPLETED | 1 |  |
+| SETTLED | 2 |  |
 
 
  
 
  
+
+
+<a name=".Admin"></a>
+
+### Admin
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| ListTopups | [.ListTopupsRequest](#ListTopupsRequest) | [.ListTopupsReply](#ListTopupsReply) | ListTopups returns all the internal topups |
+| ChangeSpread | [.ChangeSpreadRequest](#ChangeSpreadRequest) | [.ChangeSpreadReply](#ChangeSpreadReply) | ChangeSpread updates the percentage taken as service fee |
 
 
 <a name=".Taxi"></a>
@@ -286,15 +209,8 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Topup | [.TopupRequest](#TopupRequest) | [.TopupReply](#TopupReply) | The endpoint Topup it&#39;s called by the user without account and are willing to pay with Lightning Network.
-
-The process will returs a BOLT11 Lightning Invoice to be paid
-
-Once the LN invoice has been paid by the user the PSET with added LBTC fees could be found in the GetTopupResponse |
-| GetTopup | [.GetTopupRequest](#GetTopupRequest) | [.GetTopupReply](#GetTopupReply) | The status of the topup can be fetched via GetTopup rpc. |
-| TopupWithKey | [.TopupWithKeyRequest](#TopupWithKeyRequest) | [.TopupWithKeyReply](#TopupWithKeyReply) | Recurrent users could signup for an account and obtains an API KEY that allows to programmatically invoke topups. |
-| GetAssetEstimate | [.GetAssetEstimateRequest](#GetAssetEstimateRequest) | [.GetAssetEstimateReply](#GetAssetEstimateReply) | A subset of supported stablecoins could be accepted as payment for topups. Before calling the actual TopupWithAsset the user could call the GetAssetEstimate rpc |
-| TopupWithAsset | [.TopupWithAssetRequest](#TopupWithAssetRequest) | [.TopupWithAssetReply](#TopupWithAssetReply) |  |
+| ListAssets | [.ListAssetsRequest](#ListAssetsRequest) | [.ListAssetsReply](#ListAssetsReply) | ListAssets rpc returns a subset of supported elements assets that could be accepted as payment for topups |
+| TopupWithAsset | [.TopupWithAssetRequest](#TopupWithAssetRequest) | [.TopupWithAssetReply](#TopupWithAssetReply) | TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi. The transaction is signed with SIGHASH_ALL | ANYONECANPAY |
 
  
 

@@ -4,7 +4,7 @@
 // 	protoc        v3.6.1
 // source: taxi.proto
 
-package taxi
+package trade
 
 import (
 	proto "github.com/golang/protobuf/proto"
@@ -25,109 +25,63 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type Order_Status int32
+type ListTopupsReply_Status int32
 
 const (
-	Order_UNPAID Order_Status = 0
-	Order_PAID   Order_Status = 1
+	ListTopupsReply_REQUESTED ListTopupsReply_Status = 0
+	ListTopupsReply_COMPLETED ListTopupsReply_Status = 1
+	ListTopupsReply_SETTLED   ListTopupsReply_Status = 2
 )
 
-// Enum value maps for Order_Status.
+// Enum value maps for ListTopupsReply_Status.
 var (
-	Order_Status_name = map[int32]string{
-		0: "UNPAID",
-		1: "PAID",
+	ListTopupsReply_Status_name = map[int32]string{
+		0: "REQUESTED",
+		1: "COMPLETED",
+		2: "SETTLED",
 	}
-	Order_Status_value = map[string]int32{
-		"UNPAID": 0,
-		"PAID":   1,
+	ListTopupsReply_Status_value = map[string]int32{
+		"REQUESTED": 0,
+		"COMPLETED": 1,
+		"SETTLED":   2,
 	}
 )
 
-func (x Order_Status) Enum() *Order_Status {
-	p := new(Order_Status)
+func (x ListTopupsReply_Status) Enum() *ListTopupsReply_Status {
+	p := new(ListTopupsReply_Status)
 	*p = x
 	return p
 }
 
-func (x Order_Status) String() string {
+func (x ListTopupsReply_Status) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (Order_Status) Descriptor() protoreflect.EnumDescriptor {
+func (ListTopupsReply_Status) Descriptor() protoreflect.EnumDescriptor {
 	return file_taxi_proto_enumTypes[0].Descriptor()
 }
 
-func (Order_Status) Type() protoreflect.EnumType {
+func (ListTopupsReply_Status) Type() protoreflect.EnumType {
 	return &file_taxi_proto_enumTypes[0]
 }
 
-func (x Order_Status) Number() protoreflect.EnumNumber {
+func (x ListTopupsReply_Status) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use Order_Status.Descriptor instead.
-func (Order_Status) EnumDescriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{12, 0}
+// Deprecated: Use ListTopupsReply_Status.Descriptor instead.
+func (ListTopupsReply_Status) EnumDescriptor() ([]byte, []int) {
+	return file_taxi_proto_rawDescGZIP(), []int{5, 0}
 }
 
-type Order_PaymentMethod int32
-
-const (
-	Order_PAY_PER_USE Order_PaymentMethod = 0
-	Order_API_KEY     Order_PaymentMethod = 1
-	Order_ASSET       Order_PaymentMethod = 2
-)
-
-// Enum value maps for Order_PaymentMethod.
-var (
-	Order_PaymentMethod_name = map[int32]string{
-		0: "PAY_PER_USE",
-		1: "API_KEY",
-		2: "ASSET",
-	}
-	Order_PaymentMethod_value = map[string]int32{
-		"PAY_PER_USE": 0,
-		"API_KEY":     1,
-		"ASSET":       2,
-	}
-)
-
-func (x Order_PaymentMethod) Enum() *Order_PaymentMethod {
-	p := new(Order_PaymentMethod)
-	*p = x
-	return p
-}
-
-func (x Order_PaymentMethod) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Order_PaymentMethod) Descriptor() protoreflect.EnumDescriptor {
-	return file_taxi_proto_enumTypes[1].Descriptor()
-}
-
-func (Order_PaymentMethod) Type() protoreflect.EnumType {
-	return &file_taxi_proto_enumTypes[1]
-}
-
-func (x Order_PaymentMethod) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Order_PaymentMethod.Descriptor instead.
-func (Order_PaymentMethod) EnumDescriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{12, 1}
-}
-
-type TopupRequest struct {
+type ListAssetsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *TopupRequest) Reset() {
-	*x = TopupRequest{}
+func (x *ListAssetsRequest) Reset() {
+	*x = ListAssetsRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_taxi_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -135,13 +89,13 @@ func (x *TopupRequest) Reset() {
 	}
 }
 
-func (x *TopupRequest) String() string {
+func (x *ListAssetsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TopupRequest) ProtoMessage() {}
+func (*ListAssetsRequest) ProtoMessage() {}
 
-func (x *TopupRequest) ProtoReflect() protoreflect.Message {
+func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_taxi_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -153,19 +107,21 @@ func (x *TopupRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TopupRequest.ProtoReflect.Descriptor instead.
-func (*TopupRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListAssetsRequest.ProtoReflect.Descriptor instead.
+func (*ListAssetsRequest) Descriptor() ([]byte, []int) {
 	return file_taxi_proto_rawDescGZIP(), []int{0}
 }
 
-type TopupReply struct {
+type ListAssetsReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	AssetHash []string `protobuf:"bytes,1,rep,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"` // asset hash accepted as payout
 }
 
-func (x *TopupReply) Reset() {
-	*x = TopupReply{}
+func (x *ListAssetsReply) Reset() {
+	*x = ListAssetsReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_taxi_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -173,13 +129,13 @@ func (x *TopupReply) Reset() {
 	}
 }
 
-func (x *TopupReply) String() string {
+func (x *ListAssetsReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TopupReply) ProtoMessage() {}
+func (*ListAssetsReply) ProtoMessage() {}
 
-func (x *TopupReply) ProtoReflect() protoreflect.Message {
+func (x *ListAssetsReply) ProtoReflect() protoreflect.Message {
 	mi := &file_taxi_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -191,305 +147,16 @@ func (x *TopupReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TopupReply.ProtoReflect.Descriptor instead.
-func (*TopupReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListAssetsReply.ProtoReflect.Descriptor instead.
+func (*ListAssetsReply) Descriptor() ([]byte, []int) {
 	return file_taxi_proto_rawDescGZIP(), []int{1}
 }
 
-type GetTopupRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	OrderId string `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-}
-
-func (x *GetTopupRequest) Reset() {
-	*x = GetTopupRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetTopupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTopupRequest) ProtoMessage() {}
-
-func (x *GetTopupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTopupRequest.ProtoReflect.Descriptor instead.
-func (*GetTopupRequest) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *GetTopupRequest) GetOrderId() string {
-	if x != nil {
-		return x.OrderId
-	}
-	return ""
-}
-
-type GetTopupReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Order *Order `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-}
-
-func (x *GetTopupReply) Reset() {
-	*x = GetTopupReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetTopupReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTopupReply) ProtoMessage() {}
-
-func (x *GetTopupReply) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTopupReply.ProtoReflect.Descriptor instead.
-func (*GetTopupReply) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GetTopupReply) GetOrder() *Order {
-	if x != nil {
-		return x.Order
-	}
-	return nil
-}
-
-type TopupWithKeyRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *TopupWithKeyRequest) Reset() {
-	*x = TopupWithKeyRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *TopupWithKeyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TopupWithKeyRequest) ProtoMessage() {}
-
-func (x *TopupWithKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TopupWithKeyRequest.ProtoReflect.Descriptor instead.
-func (*TopupWithKeyRequest) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{4}
-}
-
-type TopupWithKeyReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *TopupWithKeyReply) Reset() {
-	*x = TopupWithKeyReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *TopupWithKeyReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TopupWithKeyReply) ProtoMessage() {}
-
-func (x *TopupWithKeyReply) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TopupWithKeyReply.ProtoReflect.Descriptor instead.
-func (*TopupWithKeyReply) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{5}
-}
-
-type GetAssetEstimateRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Unsigned  *Unsigned `protobuf:"bytes,1,opt,name=unsigned,proto3" json:"unsigned,omitempty"`
-	AssetHash string    `protobuf:"bytes,2,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`
-}
-
-func (x *GetAssetEstimateRequest) Reset() {
-	*x = GetAssetEstimateRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetAssetEstimateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetAssetEstimateRequest) ProtoMessage() {}
-
-func (x *GetAssetEstimateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetAssetEstimateRequest.ProtoReflect.Descriptor instead.
-func (*GetAssetEstimateRequest) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *GetAssetEstimateRequest) GetUnsigned() *Unsigned {
-	if x != nil {
-		return x.Unsigned
-	}
-	return nil
-}
-
-func (x *GetAssetEstimateRequest) GetAssetHash() string {
+func (x *ListAssetsReply) GetAssetHash() []string {
 	if x != nil {
 		return x.AssetHash
 	}
-	return ""
-}
-
-type GetAssetEstimateReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Breakdown   *Breakdown `protobuf:"bytes,1,opt,name=breakdown,proto3" json:"breakdown,omitempty"`
-	AssetAmount uint64     `protobuf:"varint,2,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"`
-	AssetHash   string     `protobuf:"bytes,3,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`
-	OrderId     string     `protobuf:"bytes,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-}
-
-func (x *GetAssetEstimateReply) Reset() {
-	*x = GetAssetEstimateReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetAssetEstimateReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetAssetEstimateReply) ProtoMessage() {}
-
-func (x *GetAssetEstimateReply) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetAssetEstimateReply.ProtoReflect.Descriptor instead.
-func (*GetAssetEstimateReply) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *GetAssetEstimateReply) GetBreakdown() *Breakdown {
-	if x != nil {
-		return x.Breakdown
-	}
 	return nil
-}
-
-func (x *GetAssetEstimateReply) GetAssetAmount() uint64 {
-	if x != nil {
-		return x.AssetAmount
-	}
-	return 0
-}
-
-func (x *GetAssetEstimateReply) GetAssetHash() string {
-	if x != nil {
-		return x.AssetHash
-	}
-	return ""
-}
-
-func (x *GetAssetEstimateReply) GetOrderId() string {
-	if x != nil {
-		return x.OrderId
-	}
-	return ""
 }
 
 type TopupWithAssetRequest struct {
@@ -497,15 +164,14 @@ type TopupWithAssetRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Unsigned  *Unsigned `protobuf:"bytes,1,opt,name=unsigned,proto3" json:"unsigned,omitempty"`
-	AssetHash string    `protobuf:"bytes,2,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`
-	OrderId   string    `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	AssetHash string `protobuf:"bytes,1,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`  // asset hash to be used for payout
+	FeeAmount uint64 `protobuf:"varint,2,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"` // amount in satoshis of bitcoin needed to cover the fees. It's up to the client to estimate and ask the precise amount
 }
 
 func (x *TopupWithAssetRequest) Reset() {
 	*x = TopupWithAssetRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[8]
+		mi := &file_taxi_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -518,7 +184,7 @@ func (x *TopupWithAssetRequest) String() string {
 func (*TopupWithAssetRequest) ProtoMessage() {}
 
 func (x *TopupWithAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[8]
+	mi := &file_taxi_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -531,14 +197,7 @@ func (x *TopupWithAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopupWithAssetRequest.ProtoReflect.Descriptor instead.
 func (*TopupWithAssetRequest) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *TopupWithAssetRequest) GetUnsigned() *Unsigned {
-	if x != nil {
-		return x.Unsigned
-	}
-	return nil
+	return file_taxi_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TopupWithAssetRequest) GetAssetHash() string {
@@ -548,11 +207,11 @@ func (x *TopupWithAssetRequest) GetAssetHash() string {
 	return ""
 }
 
-func (x *TopupWithAssetRequest) GetOrderId() string {
+func (x *TopupWithAssetRequest) GetFeeAmount() uint64 {
 	if x != nil {
-		return x.OrderId
+		return x.FeeAmount
 	}
-	return ""
+	return 0
 }
 
 type TopupWithAssetReply struct {
@@ -560,16 +219,18 @@ type TopupWithAssetReply struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Order       *Order `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-	AssetAmount uint64 `protobuf:"varint,2,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"`
-	AssetHash   string `protobuf:"bytes,3,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`
-	Expiry      uint64 `protobuf:"varint,4,opt,name=expiry,proto3" json:"expiry,omitempty"`
+	TopupId     string `protobuf:"bytes,1,opt,name=topup_id,json=topupId,proto3" json:"topup_id,omitempty"`              //random identifier of the currer topup
+	Partial     string `protobuf:"bytes,2,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_ALL | ANYONECANPAY
+	AssetHash   string `protobuf:"bytes,3,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`        // the asset hash used as payout for bitcoin fees
+	AssetAmount uint64 `protobuf:"varint,4,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout
+	BasisPoint  int32  `protobuf:"varint,5,opt,name=basis_point,json=basisPoint,proto3" json:"basis_point,omitempty"`    // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+	Expiry      uint64 `protobuf:"varint,6,opt,name=expiry,proto3" json:"expiry,omitempty"`                              // the unix timestamp after wich the locked LBTC input will provably be double-spent
 }
 
 func (x *TopupWithAssetReply) Reset() {
 	*x = TopupWithAssetReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[9]
+		mi := &file_taxi_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -582,7 +243,7 @@ func (x *TopupWithAssetReply) String() string {
 func (*TopupWithAssetReply) ProtoMessage() {}
 
 func (x *TopupWithAssetReply) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[9]
+	mi := &file_taxi_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,21 +256,21 @@ func (x *TopupWithAssetReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopupWithAssetReply.ProtoReflect.Descriptor instead.
 func (*TopupWithAssetReply) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{9}
+	return file_taxi_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *TopupWithAssetReply) GetOrder() *Order {
+func (x *TopupWithAssetReply) GetTopupId() string {
 	if x != nil {
-		return x.Order
+		return x.TopupId
 	}
-	return nil
+	return ""
 }
 
-func (x *TopupWithAssetReply) GetAssetAmount() uint64 {
+func (x *TopupWithAssetReply) GetPartial() string {
 	if x != nil {
-		return x.AssetAmount
+		return x.Partial
 	}
-	return 0
+	return ""
 }
 
 func (x *TopupWithAssetReply) GetAssetHash() string {
@@ -619,6 +280,20 @@ func (x *TopupWithAssetReply) GetAssetHash() string {
 	return ""
 }
 
+func (x *TopupWithAssetReply) GetAssetAmount() uint64 {
+	if x != nil {
+		return x.AssetAmount
+	}
+	return 0
+}
+
+func (x *TopupWithAssetReply) GetBasisPoint() int32 {
+	if x != nil {
+		return x.BasisPoint
+	}
+	return 0
+}
+
 func (x *TopupWithAssetReply) GetExpiry() uint64 {
 	if x != nil {
 		return x.Expiry
@@ -626,32 +301,31 @@ func (x *TopupWithAssetReply) GetExpiry() uint64 {
 	return 0
 }
 
-type Unsigned struct {
+type ListTopupsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Pset       string  `protobuf:"bytes,1,opt,name=pset,proto3" json:"pset,omitempty"`
-	SatPerByte float32 `protobuf:"fixed32,2,opt,name=sat_per_byte,json=satPerByte,proto3" json:"sat_per_byte,omitempty"` // default 0.1
+	AssetHash string `protobuf:"bytes,1,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"` // the asset hash to filetr the topups. If empty, all topups of all assets will be returned
 }
 
-func (x *Unsigned) Reset() {
-	*x = Unsigned{}
+func (x *ListTopupsRequest) Reset() {
+	*x = ListTopupsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[10]
+		mi := &file_taxi_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *Unsigned) String() string {
+func (x *ListTopupsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Unsigned) ProtoMessage() {}
+func (*ListTopupsRequest) ProtoMessage() {}
 
-func (x *Unsigned) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[10]
+func (x *ListTopupsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_taxi_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -662,50 +336,51 @@ func (x *Unsigned) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Unsigned.ProtoReflect.Descriptor instead.
-func (*Unsigned) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use ListTopupsRequest.ProtoReflect.Descriptor instead.
+func (*ListTopupsRequest) Descriptor() ([]byte, []int) {
+	return file_taxi_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Unsigned) GetPset() string {
+func (x *ListTopupsRequest) GetAssetHash() string {
 	if x != nil {
-		return x.Pset
+		return x.AssetHash
 	}
 	return ""
 }
 
-func (x *Unsigned) GetSatPerByte() float32 {
-	if x != nil {
-		return x.SatPerByte
-	}
-	return 0
-}
-
-type PartialWithFees struct {
+type ListTopupsReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Pset string `protobuf:"bytes,1,opt,name=pset,proto3" json:"pset,omitempty"`
+	TopupId     string                 `protobuf:"bytes,1,opt,name=topup_id,json=topupId,proto3" json:"topup_id,omitempty"` //random identifier of the currer topup
+	Status      ListTopupsReply_Status `protobuf:"varint,2,opt,name=status,proto3,enum=ListTopupsReply_Status" json:"status,omitempty"`
+	Partial     string                 `protobuf:"bytes,3,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_ALL | ANYONECANPAY
+	AssetHash   string                 `protobuf:"bytes,4,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`        // the asset hash used as payout for bitcoin fees
+	AssetAmount uint64                 `protobuf:"varint,5,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout
+	AssetPrice  float32                `protobuf:"fixed32,6,opt,name=asset_price,json=assetPrice,proto3" json:"asset_price,omitempty"`   // the price of bitcoin expressed in asset
+	FeeAmount   uint64                 `protobuf:"varint,7,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`       // amount in satoshis of bitcoin needed to cover the fees
+	BasisPoint  int32                  `protobuf:"varint,8,opt,name=basis_point,json=basisPoint,proto3" json:"basis_point,omitempty"`    // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+	Times       *Timestamps            `protobuf:"bytes,9,opt,name=times,proto3" json:"times,omitempty"`                                 // the timestamps of each status change
 }
 
-func (x *PartialWithFees) Reset() {
-	*x = PartialWithFees{}
+func (x *ListTopupsReply) Reset() {
+	*x = ListTopupsReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[11]
+		mi := &file_taxi_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *PartialWithFees) String() string {
+func (x *ListTopupsReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PartialWithFees) ProtoMessage() {}
+func (*ListTopupsReply) ProtoMessage() {}
 
-func (x *PartialWithFees) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[11]
+func (x *ListTopupsReply) ProtoReflect() protoreflect.Message {
+	mi := &file_taxi_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,160 +391,102 @@ func (x *PartialWithFees) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartialWithFees.ProtoReflect.Descriptor instead.
-func (*PartialWithFees) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{11}
+// Deprecated: Use ListTopupsReply.ProtoReflect.Descriptor instead.
+func (*ListTopupsReply) Descriptor() ([]byte, []int) {
+	return file_taxi_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *PartialWithFees) GetPset() string {
+func (x *ListTopupsReply) GetTopupId() string {
 	if x != nil {
-		return x.Pset
+		return x.TopupId
 	}
 	return ""
 }
 
-type Order struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	OrderId     string       `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Status      Order_Status `protobuf:"varint,2,opt,name=status,proto3,enum=Order_Status" json:"status,omitempty"`
-	IsCompleted bool         `protobuf:"varint,3,opt,name=is_completed,json=isCompleted,proto3" json:"is_completed,omitempty"`
-	Unsigned    *Unsigned    `protobuf:"bytes,4,opt,name=unsigned,proto3" json:"unsigned,omitempty"`
-	Breakdown   *Breakdown   `protobuf:"bytes,5,opt,name=breakdown,proto3" json:"breakdown,omitempty"`
-	// This is the pset with fees
-	Partial     *PartialWithFees    `protobuf:"bytes,6,opt,name=partial,proto3" json:"partial,omitempty"`
-	CreatedAt   int64               `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Method      Order_PaymentMethod `protobuf:"varint,8,opt,name=method,proto3,enum=Order_PaymentMethod" json:"method,omitempty"`
-	AssetAmount uint64              `protobuf:"varint,9,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"`
-}
-
-func (x *Order) Reset() {
-	*x = Order{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[12]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Order) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Order) ProtoMessage() {}
-
-func (x *Order) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[12]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Order.ProtoReflect.Descriptor instead.
-func (*Order) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *Order) GetOrderId() string {
-	if x != nil {
-		return x.OrderId
-	}
-	return ""
-}
-
-func (x *Order) GetStatus() Order_Status {
+func (x *ListTopupsReply) GetStatus() ListTopupsReply_Status {
 	if x != nil {
 		return x.Status
 	}
-	return Order_UNPAID
+	return ListTopupsReply_REQUESTED
 }
 
-func (x *Order) GetIsCompleted() bool {
-	if x != nil {
-		return x.IsCompleted
-	}
-	return false
-}
-
-func (x *Order) GetUnsigned() *Unsigned {
-	if x != nil {
-		return x.Unsigned
-	}
-	return nil
-}
-
-func (x *Order) GetBreakdown() *Breakdown {
-	if x != nil {
-		return x.Breakdown
-	}
-	return nil
-}
-
-func (x *Order) GetPartial() *PartialWithFees {
+func (x *ListTopupsReply) GetPartial() string {
 	if x != nil {
 		return x.Partial
 	}
-	return nil
+	return ""
 }
 
-func (x *Order) GetCreatedAt() int64 {
+func (x *ListTopupsReply) GetAssetHash() string {
 	if x != nil {
-		return x.CreatedAt
+		return x.AssetHash
 	}
-	return 0
+	return ""
 }
 
-func (x *Order) GetMethod() Order_PaymentMethod {
-	if x != nil {
-		return x.Method
-	}
-	return Order_PAY_PER_USE
-}
-
-func (x *Order) GetAssetAmount() uint64 {
+func (x *ListTopupsReply) GetAssetAmount() uint64 {
 	if x != nil {
 		return x.AssetAmount
 	}
 	return 0
 }
 
-type Breakdown struct {
+func (x *ListTopupsReply) GetAssetPrice() float32 {
+	if x != nil {
+		return x.AssetPrice
+	}
+	return 0
+}
+
+func (x *ListTopupsReply) GetFeeAmount() uint64 {
+	if x != nil {
+		return x.FeeAmount
+	}
+	return 0
+}
+
+func (x *ListTopupsReply) GetBasisPoint() int32 {
+	if x != nil {
+		return x.BasisPoint
+	}
+	return 0
+}
+
+func (x *ListTopupsReply) GetTimes() *Timestamps {
+	if x != nil {
+		return x.Times
+	}
+	return nil
+}
+
+type Timestamps struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Size       uint64  `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
-	SatPerByte float32 `protobuf:"fixed32,2,opt,name=sat_per_byte,json=satPerByte,proto3" json:"sat_per_byte,omitempty"` // default 0.1
-	Fee        uint64  `protobuf:"varint,3,opt,name=fee,proto3" json:"fee,omitempty"`
-	Rate       float32 `protobuf:"fixed32,4,opt,name=rate,proto3" json:"rate,omitempty"`
-	Spread     uint64  `protobuf:"varint,5,opt,name=spread,proto3" json:"spread,omitempty"`
-	Total      uint64  `protobuf:"varint,6,opt,name=total,proto3" json:"total,omitempty"`
+	RequestedAt uint64 `protobuf:"varint,1,opt,name=requested_at,json=requestedAt,proto3" json:"requested_at,omitempty"` // the unix timestamp of when the taxi received the request of a topup from a client
+	CompletedAt uint64 `protobuf:"varint,2,opt,name=completed_at,json=completedAt,proto3" json:"completed_at,omitempty"` // the unix timestamp of when the taxi completed the topup and responded to client
+	SettledAt   uint64 `protobuf:"varint,3,opt,name=settled_at,json=settledAt,proto3" json:"settled_at,omitempty"`       // the unix timestamp of the block in wich the topup is included in the chain.
+	ExpiredAt   uint64 `protobuf:"varint,9,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`       // the unix timestamp after wich the locked bitcoin input could have been double-spent (if any)
 }
 
-func (x *Breakdown) Reset() {
-	*x = Breakdown{}
+func (x *Timestamps) Reset() {
+	*x = Timestamps{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_taxi_proto_msgTypes[13]
+		mi := &file_taxi_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *Breakdown) String() string {
+func (x *Timestamps) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Breakdown) ProtoMessage() {}
+func (*Timestamps) ProtoMessage() {}
 
-func (x *Breakdown) ProtoReflect() protoreflect.Message {
-	mi := &file_taxi_proto_msgTypes[13]
+func (x *Timestamps) ProtoReflect() protoreflect.Message {
+	mi := &file_taxi_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -880,166 +497,211 @@ func (x *Breakdown) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Breakdown.ProtoReflect.Descriptor instead.
-func (*Breakdown) Descriptor() ([]byte, []int) {
-	return file_taxi_proto_rawDescGZIP(), []int{13}
+// Deprecated: Use Timestamps.ProtoReflect.Descriptor instead.
+func (*Timestamps) Descriptor() ([]byte, []int) {
+	return file_taxi_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *Breakdown) GetSize() uint64 {
+func (x *Timestamps) GetRequestedAt() uint64 {
 	if x != nil {
-		return x.Size
+		return x.RequestedAt
 	}
 	return 0
 }
 
-func (x *Breakdown) GetSatPerByte() float32 {
+func (x *Timestamps) GetCompletedAt() uint64 {
 	if x != nil {
-		return x.SatPerByte
+		return x.CompletedAt
 	}
 	return 0
 }
 
-func (x *Breakdown) GetFee() uint64 {
+func (x *Timestamps) GetSettledAt() uint64 {
 	if x != nil {
-		return x.Fee
+		return x.SettledAt
 	}
 	return 0
 }
 
-func (x *Breakdown) GetRate() float32 {
+func (x *Timestamps) GetExpiredAt() uint64 {
 	if x != nil {
-		return x.Rate
+		return x.ExpiredAt
 	}
 	return 0
 }
 
-func (x *Breakdown) GetSpread() uint64 {
+type ChangeSpreadRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BasisPoint int32 `protobuf:"varint,1,opt,name=basis_point,json=basisPoint,proto3" json:"basis_point,omitempty"`
+}
+
+func (x *ChangeSpreadRequest) Reset() {
+	*x = ChangeSpreadRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_taxi_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ChangeSpreadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeSpreadRequest) ProtoMessage() {}
+
+func (x *ChangeSpreadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_taxi_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeSpreadRequest.ProtoReflect.Descriptor instead.
+func (*ChangeSpreadRequest) Descriptor() ([]byte, []int) {
+	return file_taxi_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ChangeSpreadRequest) GetBasisPoint() int32 {
 	if x != nil {
-		return x.Spread
+		return x.BasisPoint
 	}
 	return 0
 }
 
-func (x *Breakdown) GetTotal() uint64 {
-	if x != nil {
-		return x.Total
+type ChangeSpreadReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ChangeSpreadReply) Reset() {
+	*x = ChangeSpreadReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_taxi_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
 	}
-	return 0
+}
+
+func (x *ChangeSpreadReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeSpreadReply) ProtoMessage() {}
+
+func (x *ChangeSpreadReply) ProtoReflect() protoreflect.Message {
+	mi := &file_taxi_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeSpreadReply.ProtoReflect.Descriptor instead.
+func (*ChangeSpreadReply) Descriptor() ([]byte, []int) {
+	return file_taxi_proto_rawDescGZIP(), []int{8}
 }
 
 var File_taxi_proto protoreflect.FileDescriptor
 
 var file_taxi_proto_rawDesc = []byte{
-	0x0a, 0x0a, 0x74, 0x61, 0x78, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x0e, 0x0a, 0x0c,
-	0x54, 0x6f, 0x70, 0x75, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x0c, 0x0a, 0x0a,
-	0x54, 0x6f, 0x70, 0x75, 0x70, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2c, 0x0a, 0x0f, 0x47, 0x65,
-	0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a,
-	0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x22, 0x2d, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x54,
-	0x6f, 0x70, 0x75, 0x70, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1c, 0x0a, 0x05, 0x6f, 0x72, 0x64,
-	0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x06, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72,
-	0x52, 0x05, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x22, 0x15, 0x0a, 0x13, 0x54, 0x6f, 0x70, 0x75, 0x70,
-	0x57, 0x69, 0x74, 0x68, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x13,
-	0x0a, 0x11, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x4b, 0x65, 0x79, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x22, 0x5f, 0x0a, 0x17, 0x47, 0x65, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74, 0x45,
-	0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x25,
-	0x0a, 0x08, 0x75, 0x6e, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x09, 0x2e, 0x55, 0x6e, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x52, 0x08, 0x75, 0x6e, 0x73,
-	0x69, 0x67, 0x6e, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x68,
-	0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73, 0x65, 0x74,
-	0x48, 0x61, 0x73, 0x68, 0x22, 0x9e, 0x01, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x41, 0x73, 0x73, 0x65,
-	0x74, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x28,
-	0x0a, 0x09, 0x62, 0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x0a, 0x2e, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x52, 0x09, 0x62,
-	0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x73, 0x73, 0x65,
-	0x74, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b,
-	0x61, 0x73, 0x73, 0x65, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
-	0x73, 0x73, 0x65, 0x74, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x09, 0x61, 0x73, 0x73, 0x65, 0x74, 0x48, 0x61, 0x73, 0x68, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72,
-	0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6f, 0x72,
-	0x64, 0x65, 0x72, 0x49, 0x64, 0x22, 0x78, 0x0a, 0x15, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69,
-	0x74, 0x68, 0x41, 0x73, 0x73, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x25,
-	0x0a, 0x08, 0x75, 0x6e, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x09, 0x2e, 0x55, 0x6e, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x52, 0x08, 0x75, 0x6e, 0x73,
-	0x69, 0x67, 0x6e, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x68,
-	0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73, 0x65, 0x74,
-	0x48, 0x61, 0x73, 0x68, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x22,
-	0x8d, 0x01, 0x0a, 0x13, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x41, 0x73, 0x73,
-	0x65, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1c, 0x0a, 0x05, 0x6f, 0x72, 0x64, 0x65, 0x72,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x06, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x05,
-	0x6f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x61,
-	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x61, 0x73, 0x73,
-	0x65, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65,
-	0x74, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73,
-	0x73, 0x65, 0x74, 0x48, 0x61, 0x73, 0x68, 0x12, 0x16, 0x0a, 0x06, 0x65, 0x78, 0x70, 0x69, 0x72,
-	0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x65, 0x78, 0x70, 0x69, 0x72, 0x79, 0x22,
-	0x40, 0x0a, 0x08, 0x55, 0x6e, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x70,
-	0x73, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x73, 0x65, 0x74, 0x12,
-	0x20, 0x0a, 0x0c, 0x73, 0x61, 0x74, 0x5f, 0x70, 0x65, 0x72, 0x5f, 0x62, 0x79, 0x74, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x73, 0x61, 0x74, 0x50, 0x65, 0x72, 0x42, 0x79, 0x74,
-	0x65, 0x22, 0x25, 0x0a, 0x0f, 0x50, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c, 0x57, 0x69, 0x74, 0x68,
-	0x46, 0x65, 0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x73, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x04, 0x70, 0x73, 0x65, 0x74, 0x22, 0xb3, 0x03, 0x0a, 0x05, 0x4f, 0x72, 0x64,
-	0x65, 0x72, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x25, 0x0a,
-	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0d, 0x2e,
-	0x4f, 0x72, 0x64, 0x65, 0x72, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x69, 0x73, 0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x6c,
-	0x65, 0x74, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x69, 0x73, 0x43, 0x6f,
-	0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x12, 0x25, 0x0a, 0x08, 0x75, 0x6e, 0x73, 0x69, 0x67,
-	0x6e, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x09, 0x2e, 0x55, 0x6e, 0x73, 0x69,
-	0x67, 0x6e, 0x65, 0x64, 0x52, 0x08, 0x75, 0x6e, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x12, 0x28,
-	0x0a, 0x09, 0x62, 0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x0a, 0x2e, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x52, 0x09, 0x62,
-	0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x12, 0x2a, 0x0a, 0x07, 0x70, 0x61, 0x72, 0x74,
-	0x69, 0x61, 0x6c, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x50, 0x61, 0x72, 0x74,
-	0x69, 0x61, 0x6c, 0x57, 0x69, 0x74, 0x68, 0x46, 0x65, 0x65, 0x73, 0x52, 0x07, 0x70, 0x61, 0x72,
-	0x74, 0x69, 0x61, 0x6c, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f,
-	0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x64, 0x41, 0x74, 0x12, 0x2c, 0x0a, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x08, 0x20,
-	0x01, 0x28, 0x0e, 0x32, 0x14, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x61, 0x79, 0x6d,
-	0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x52, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f,
-	0x64, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x61, 0x73, 0x73, 0x65, 0x74, 0x41, 0x6d,
-	0x6f, 0x75, 0x6e, 0x74, 0x22, 0x1e, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0a,
-	0x0a, 0x06, 0x55, 0x4e, 0x50, 0x41, 0x49, 0x44, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x50, 0x41,
-	0x49, 0x44, 0x10, 0x01, 0x22, 0x38, 0x0a, 0x0d, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x4d,
-	0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x0f, 0x0a, 0x0b, 0x50, 0x41, 0x59, 0x5f, 0x50, 0x45, 0x52,
-	0x5f, 0x55, 0x53, 0x45, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x41, 0x50, 0x49, 0x5f, 0x4b, 0x45,
-	0x59, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x53, 0x53, 0x45, 0x54, 0x10, 0x02, 0x22, 0x95,
-	0x01, 0x0a, 0x09, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x64, 0x6f, 0x77, 0x6e, 0x12, 0x12, 0x0a, 0x04,
-	0x73, 0x69, 0x7a, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65,
-	0x12, 0x20, 0x0a, 0x0c, 0x73, 0x61, 0x74, 0x5f, 0x70, 0x65, 0x72, 0x5f, 0x62, 0x79, 0x74, 0x65,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x73, 0x61, 0x74, 0x50, 0x65, 0x72, 0x42, 0x79,
-	0x74, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x66, 0x65, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x03, 0x66, 0x65, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x61, 0x74, 0x65, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x02, 0x52, 0x04, 0x72, 0x61, 0x74, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x70, 0x72, 0x65,
-	0x61, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x70, 0x72, 0x65, 0x61, 0x64,
-	0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x32, 0x99, 0x02, 0x0a, 0x04, 0x54, 0x61, 0x78, 0x69, 0x12,
-	0x23, 0x0a, 0x05, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x12, 0x0d, 0x2e, 0x54, 0x6f, 0x70, 0x75, 0x70,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0b, 0x2e, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x12, 0x2c, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70,
-	0x12, 0x10, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x0e, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x52, 0x65, 0x70,
-	0x6c, 0x79, 0x12, 0x38, 0x0a, 0x0c, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x4b,
-	0x65, 0x79, 0x12, 0x14, 0x2e, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x4b, 0x65,
-	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x54, 0x6f, 0x70, 0x75, 0x70,
-	0x57, 0x69, 0x74, 0x68, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x44, 0x0a, 0x10,
-	0x47, 0x65, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65,
-	0x12, 0x18, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74, 0x45, 0x73, 0x74, 0x69, 0x6d,
-	0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x47, 0x65, 0x74,
-	0x41, 0x73, 0x73, 0x65, 0x74, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70,
-	0x6c, 0x79, 0x12, 0x3e, 0x0a, 0x0e, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x41,
-	0x73, 0x73, 0x65, 0x74, 0x12, 0x16, 0x2e, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68,
-	0x41, 0x73, 0x73, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x54,
+	0x0a, 0x0a, 0x74, 0x61, 0x78, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x13, 0x0a, 0x11,
+	0x4c, 0x69, 0x73, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x30, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74, 0x73, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x68, 0x61,
+	0x73, 0x68, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73, 0x65, 0x74, 0x48,
+	0x61, 0x73, 0x68, 0x22, 0x55, 0x0a, 0x15, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68,
+	0x41, 0x73, 0x73, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x09, 0x61, 0x73, 0x73, 0x65, 0x74, 0x48, 0x61, 0x73, 0x68, 0x12, 0x1d, 0x0a, 0x0a, 0x66,
+	0x65, 0x65, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x09, 0x66, 0x65, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xc5, 0x01, 0x0a, 0x13, 0x54,
 	0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x41, 0x73, 0x73, 0x65, 0x74, 0x52, 0x65, 0x70,
-	0x6c, 0x79, 0x42, 0x3b, 0x5a, 0x39, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x76, 0x75, 0x6c, 0x70, 0x65, 0x6d, 0x76, 0x65, 0x6e, 0x74, 0x75, 0x72, 0x65, 0x73, 0x2f,
-	0x74, 0x61, 0x78, 0x69, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x67, 0x65,
-	0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x74, 0x61, 0x78, 0x69, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6c, 0x79, 0x12, 0x19, 0x0a, 0x08, 0x74, 0x6f, 0x70, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x74, 0x6f, 0x70, 0x75, 0x70, 0x49, 0x64, 0x12, 0x18, 0x0a,
+	0x07, 0x70, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x70, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74,
+	0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73,
+	0x65, 0x74, 0x48, 0x61, 0x73, 0x68, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f,
+	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x61, 0x73,
+	0x73, 0x65, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x62, 0x61, 0x73,
+	0x69, 0x73, 0x5f, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a,
+	0x62, 0x61, 0x73, 0x69, 0x73, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x65, 0x78,
+	0x70, 0x69, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x65, 0x78, 0x70, 0x69,
+	0x72, 0x79, 0x22, 0x32, 0x0a, 0x11, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74,
+	0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73,
+	0x65, 0x74, 0x48, 0x61, 0x73, 0x68, 0x22, 0xf2, 0x02, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x54,
+	0x6f, 0x70, 0x75, 0x70, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x19, 0x0a, 0x08, 0x74, 0x6f,
+	0x70, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x74, 0x6f,
+	0x70, 0x75, 0x70, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x17, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x6f, 0x70, 0x75,
+	0x70, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06,
+	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x61, 0x72, 0x74, 0x69, 0x61,
+	0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c,
+	0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73, 0x65, 0x74, 0x48, 0x61, 0x73, 0x68, 0x12,
+	0x21, 0x0a, 0x0c, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x61, 0x73, 0x73, 0x65, 0x74, 0x41, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x73, 0x73, 0x65, 0x74, 0x5f, 0x70, 0x72, 0x69, 0x63,
+	0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x61, 0x73, 0x73, 0x65, 0x74, 0x50, 0x72,
+	0x69, 0x63, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x66, 0x65, 0x65, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
+	0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x66, 0x65, 0x65, 0x41, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x62, 0x61, 0x73, 0x69, 0x73, 0x5f, 0x70, 0x6f, 0x69, 0x6e,
+	0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x62, 0x61, 0x73, 0x69, 0x73, 0x50, 0x6f,
+	0x69, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x05, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x18, 0x09, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x73, 0x52,
+	0x05, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x22, 0x33, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x0d, 0x0a, 0x09, 0x52, 0x45, 0x51, 0x55, 0x45, 0x53, 0x54, 0x45, 0x44, 0x10, 0x00, 0x12,
+	0x0d, 0x0a, 0x09, 0x43, 0x4f, 0x4d, 0x50, 0x4c, 0x45, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x0b,
+	0x0a, 0x07, 0x53, 0x45, 0x54, 0x54, 0x4c, 0x45, 0x44, 0x10, 0x02, 0x22, 0x90, 0x01, 0x0a, 0x0a,
+	0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x0b, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x21, 0x0a,
+	0x0c, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x0b, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74,
+	0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x73, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x64, 0x41, 0x74, 0x12,
+	0x1d, 0x0a, 0x0a, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x09, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x64, 0x41, 0x74, 0x22, 0x36,
+	0x0a, 0x13, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x53, 0x70, 0x72, 0x65, 0x61, 0x64, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x62, 0x61, 0x73, 0x69, 0x73, 0x5f, 0x70,
+	0x6f, 0x69, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x62, 0x61, 0x73, 0x69,
+	0x73, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x22, 0x13, 0x0a, 0x11, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65,
+	0x53, 0x70, 0x72, 0x65, 0x61, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x32, 0x7a, 0x0a, 0x04, 0x54,
+	0x61, 0x78, 0x69, 0x12, 0x32, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74,
+	0x73, 0x12, 0x12, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x73, 0x73, 0x65, 0x74, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x73, 0x73, 0x65,
+	0x74, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x3e, 0x0a, 0x0e, 0x54, 0x6f, 0x70, 0x75, 0x70,
+	0x57, 0x69, 0x74, 0x68, 0x41, 0x73, 0x73, 0x65, 0x74, 0x12, 0x16, 0x2e, 0x54, 0x6f, 0x70, 0x75,
+	0x70, 0x57, 0x69, 0x74, 0x68, 0x41, 0x73, 0x73, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x14, 0x2e, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x57, 0x69, 0x74, 0x68, 0x41, 0x73, 0x73,
+	0x65, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x32, 0x75, 0x0a, 0x05, 0x41, 0x64, 0x6d, 0x69, 0x6e,
+	0x12, 0x32, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x73, 0x12, 0x12,
+	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x10, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x6f, 0x70, 0x75, 0x70, 0x73, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x12, 0x38, 0x0a, 0x0c, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x53, 0x70,
+	0x72, 0x65, 0x61, 0x64, 0x12, 0x14, 0x2e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x53, 0x70, 0x72,
+	0x65, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x43, 0x68, 0x61,
+	0x6e, 0x67, 0x65, 0x53, 0x70, 0x72, 0x65, 0x61, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x42, 0x3c,
+	0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x76, 0x75, 0x6c,
+	0x70, 0x65, 0x6d, 0x76, 0x65, 0x6e, 0x74, 0x75, 0x72, 0x65, 0x73, 0x2f, 0x74, 0x61, 0x78, 0x69,
+	0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61,
+	0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x74, 0x72, 0x61, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1054,52 +716,36 @@ func file_taxi_proto_rawDescGZIP() []byte {
 	return file_taxi_proto_rawDescData
 }
 
-var file_taxi_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_taxi_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_taxi_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_taxi_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_taxi_proto_goTypes = []interface{}{
-	(Order_Status)(0),               // 0: Order.Status
-	(Order_PaymentMethod)(0),        // 1: Order.PaymentMethod
-	(*TopupRequest)(nil),            // 2: TopupRequest
-	(*TopupReply)(nil),              // 3: TopupReply
-	(*GetTopupRequest)(nil),         // 4: GetTopupRequest
-	(*GetTopupReply)(nil),           // 5: GetTopupReply
-	(*TopupWithKeyRequest)(nil),     // 6: TopupWithKeyRequest
-	(*TopupWithKeyReply)(nil),       // 7: TopupWithKeyReply
-	(*GetAssetEstimateRequest)(nil), // 8: GetAssetEstimateRequest
-	(*GetAssetEstimateReply)(nil),   // 9: GetAssetEstimateReply
-	(*TopupWithAssetRequest)(nil),   // 10: TopupWithAssetRequest
-	(*TopupWithAssetReply)(nil),     // 11: TopupWithAssetReply
-	(*Unsigned)(nil),                // 12: Unsigned
-	(*PartialWithFees)(nil),         // 13: PartialWithFees
-	(*Order)(nil),                   // 14: Order
-	(*Breakdown)(nil),               // 15: Breakdown
+	(ListTopupsReply_Status)(0),   // 0: ListTopupsReply.Status
+	(*ListAssetsRequest)(nil),     // 1: ListAssetsRequest
+	(*ListAssetsReply)(nil),       // 2: ListAssetsReply
+	(*TopupWithAssetRequest)(nil), // 3: TopupWithAssetRequest
+	(*TopupWithAssetReply)(nil),   // 4: TopupWithAssetReply
+	(*ListTopupsRequest)(nil),     // 5: ListTopupsRequest
+	(*ListTopupsReply)(nil),       // 6: ListTopupsReply
+	(*Timestamps)(nil),            // 7: Timestamps
+	(*ChangeSpreadRequest)(nil),   // 8: ChangeSpreadRequest
+	(*ChangeSpreadReply)(nil),     // 9: ChangeSpreadReply
 }
 var file_taxi_proto_depIdxs = []int32{
-	14, // 0: GetTopupReply.order:type_name -> Order
-	12, // 1: GetAssetEstimateRequest.unsigned:type_name -> Unsigned
-	15, // 2: GetAssetEstimateReply.breakdown:type_name -> Breakdown
-	12, // 3: TopupWithAssetRequest.unsigned:type_name -> Unsigned
-	14, // 4: TopupWithAssetReply.order:type_name -> Order
-	0,  // 5: Order.status:type_name -> Order.Status
-	12, // 6: Order.unsigned:type_name -> Unsigned
-	15, // 7: Order.breakdown:type_name -> Breakdown
-	13, // 8: Order.partial:type_name -> PartialWithFees
-	1,  // 9: Order.method:type_name -> Order.PaymentMethod
-	2,  // 10: Taxi.Topup:input_type -> TopupRequest
-	4,  // 11: Taxi.GetTopup:input_type -> GetTopupRequest
-	6,  // 12: Taxi.TopupWithKey:input_type -> TopupWithKeyRequest
-	8,  // 13: Taxi.GetAssetEstimate:input_type -> GetAssetEstimateRequest
-	10, // 14: Taxi.TopupWithAsset:input_type -> TopupWithAssetRequest
-	3,  // 15: Taxi.Topup:output_type -> TopupReply
-	5,  // 16: Taxi.GetTopup:output_type -> GetTopupReply
-	7,  // 17: Taxi.TopupWithKey:output_type -> TopupWithKeyReply
-	9,  // 18: Taxi.GetAssetEstimate:output_type -> GetAssetEstimateReply
-	11, // 19: Taxi.TopupWithAsset:output_type -> TopupWithAssetReply
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	0, // 0: ListTopupsReply.status:type_name -> ListTopupsReply.Status
+	7, // 1: ListTopupsReply.times:type_name -> Timestamps
+	1, // 2: Taxi.ListAssets:input_type -> ListAssetsRequest
+	3, // 3: Taxi.TopupWithAsset:input_type -> TopupWithAssetRequest
+	5, // 4: Admin.ListTopups:input_type -> ListTopupsRequest
+	8, // 5: Admin.ChangeSpread:input_type -> ChangeSpreadRequest
+	2, // 6: Taxi.ListAssets:output_type -> ListAssetsReply
+	4, // 7: Taxi.TopupWithAsset:output_type -> TopupWithAssetReply
+	6, // 8: Admin.ListTopups:output_type -> ListTopupsReply
+	9, // 9: Admin.ChangeSpread:output_type -> ChangeSpreadReply
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_taxi_proto_init() }
@@ -1109,7 +755,7 @@ func file_taxi_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_taxi_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TopupRequest); i {
+			switch v := v.(*ListAssetsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1121,7 +767,7 @@ func file_taxi_proto_init() {
 			}
 		}
 		file_taxi_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TopupReply); i {
+			switch v := v.(*ListAssetsReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1133,78 +779,6 @@ func file_taxi_proto_init() {
 			}
 		}
 		file_taxi_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetTopupRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_taxi_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetTopupReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_taxi_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TopupWithKeyRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_taxi_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TopupWithKeyReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_taxi_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAssetEstimateRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_taxi_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAssetEstimateReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_taxi_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TopupWithAssetRequest); i {
 			case 0:
 				return &v.state
@@ -1216,7 +790,7 @@ func file_taxi_proto_init() {
 				return nil
 			}
 		}
-		file_taxi_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_taxi_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TopupWithAssetReply); i {
 			case 0:
 				return &v.state
@@ -1228,8 +802,8 @@ func file_taxi_proto_init() {
 				return nil
 			}
 		}
-		file_taxi_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Unsigned); i {
+		file_taxi_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTopupsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1240,8 +814,8 @@ func file_taxi_proto_init() {
 				return nil
 			}
 		}
-		file_taxi_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PartialWithFees); i {
+		file_taxi_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTopupsReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1252,8 +826,8 @@ func file_taxi_proto_init() {
 				return nil
 			}
 		}
-		file_taxi_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Order); i {
+		file_taxi_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Timestamps); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1264,8 +838,20 @@ func file_taxi_proto_init() {
 				return nil
 			}
 		}
-		file_taxi_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Breakdown); i {
+		file_taxi_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ChangeSpreadRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_taxi_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ChangeSpreadReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1282,10 +868,10 @@ func file_taxi_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_taxi_proto_rawDesc,
-			NumEnums:      2,
-			NumMessages:   14,
+			NumEnums:      1,
+			NumMessages:   9,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_taxi_proto_goTypes,
 		DependencyIndexes: file_taxi_proto_depIdxs,

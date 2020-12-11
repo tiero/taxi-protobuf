@@ -179,39 +179,31 @@
             <ul>
               
                 <li>
-                  <a href="#.Breakdown"><span class="badge">M</span>Breakdown</a>
+                  <a href="#.ChangeSpreadReply"><span class="badge">M</span>ChangeSpreadReply</a>
                 </li>
               
                 <li>
-                  <a href="#.GetAssetEstimateReply"><span class="badge">M</span>GetAssetEstimateReply</a>
+                  <a href="#.ChangeSpreadRequest"><span class="badge">M</span>ChangeSpreadRequest</a>
                 </li>
               
                 <li>
-                  <a href="#.GetAssetEstimateRequest"><span class="badge">M</span>GetAssetEstimateRequest</a>
+                  <a href="#.ListAssetsReply"><span class="badge">M</span>ListAssetsReply</a>
                 </li>
               
                 <li>
-                  <a href="#.GetTopupReply"><span class="badge">M</span>GetTopupReply</a>
+                  <a href="#.ListAssetsRequest"><span class="badge">M</span>ListAssetsRequest</a>
                 </li>
               
                 <li>
-                  <a href="#.GetTopupRequest"><span class="badge">M</span>GetTopupRequest</a>
+                  <a href="#.ListTopupsReply"><span class="badge">M</span>ListTopupsReply</a>
                 </li>
               
                 <li>
-                  <a href="#.Order"><span class="badge">M</span>Order</a>
+                  <a href="#.ListTopupsRequest"><span class="badge">M</span>ListTopupsRequest</a>
                 </li>
               
                 <li>
-                  <a href="#.PartialWithFees"><span class="badge">M</span>PartialWithFees</a>
-                </li>
-              
-                <li>
-                  <a href="#.TopupReply"><span class="badge">M</span>TopupReply</a>
-                </li>
-              
-                <li>
-                  <a href="#.TopupRequest"><span class="badge">M</span>TopupRequest</a>
+                  <a href="#.Timestamps"><span class="badge">M</span>Timestamps</a>
                 </li>
               
                 <li>
@@ -222,28 +214,16 @@
                   <a href="#.TopupWithAssetRequest"><span class="badge">M</span>TopupWithAssetRequest</a>
                 </li>
               
-                <li>
-                  <a href="#.TopupWithKeyReply"><span class="badge">M</span>TopupWithKeyReply</a>
-                </li>
               
                 <li>
-                  <a href="#.TopupWithKeyRequest"><span class="badge">M</span>TopupWithKeyRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#.Unsigned"><span class="badge">M</span>Unsigned</a>
+                  <a href="#.ListTopupsReply.Status"><span class="badge">E</span>ListTopupsReply.Status</a>
                 </li>
               
               
-                <li>
-                  <a href="#.Order.PaymentMethod"><span class="badge">E</span>Order.PaymentMethod</a>
-                </li>
               
                 <li>
-                  <a href="#.Order.Status"><span class="badge">E</span>Order.Status</a>
+                  <a href="#.Admin"><span class="badge">S</span>Admin</a>
                 </li>
-              
-              
               
                 <li>
                   <a href="#.Taxi"><span class="badge">S</span>Taxi</a>
@@ -264,7 +244,14 @@
       <p></p>
 
       
-        <h3 id=".Breakdown">Breakdown</h3>
+        <h3 id=".ChangeSpreadReply">ChangeSpreadReply</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id=".ChangeSpreadRequest">ChangeSpreadRequest</h3>
         <p></p>
 
         
@@ -275,43 +262,8 @@
             <tbody>
               
                 <tr>
-                  <td>size</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>sat_per_byte</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>default 0.1 </p></td>
-                </tr>
-              
-                <tr>
-                  <td>fee</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>rate</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>spread</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>total</td>
-                  <td><a href="#uint64">uint64</a></td>
+                  <td>basis_point</td>
+                  <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -323,7 +275,7 @@
 
         
       
-        <h3 id=".GetAssetEstimateReply">GetAssetEstimateReply</h3>
+        <h3 id=".ListAssetsReply">ListAssetsReply</h3>
         <p></p>
 
         
@@ -332,33 +284,12 @@
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
-              
-                <tr>
-                  <td>breakdown</td>
-                  <td><a href="#Breakdown">Breakdown</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>asset_amount</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
               
                 <tr>
                   <td>asset_hash</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>order_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td>repeated</td>
+                  <td><p>asset hash accepted as payout </p></td>
                 </tr>
               
             </tbody>
@@ -368,7 +299,14 @@
 
         
       
-        <h3 id=".GetAssetEstimateRequest">GetAssetEstimateRequest</h3>
+        <h3 id=".ListAssetsRequest">ListAssetsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id=".ListTopupsReply">ListTopupsReply</h3>
         <p></p>
 
         
@@ -379,145 +317,66 @@
             <tbody>
               
                 <tr>
-                  <td>unsigned</td>
-                  <td><a href="#Unsigned">Unsigned</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>asset_hash</td>
+                  <td>topup_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".GetTopupReply">GetTopupReply</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>order</td>
-                  <td><a href="#Order">Order</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".GetTopupRequest">GetTopupRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>order_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".Order">Order</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>order_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>random identifier of the currer topup </p></td>
                 </tr>
               
                 <tr>
                   <td>status</td>
-                  <td><a href="#Order.Status">Order.Status</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>is_completed</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>unsigned</td>
-                  <td><a href="#Unsigned">Unsigned</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>breakdown</td>
-                  <td><a href="#Breakdown">Breakdown</a></td>
+                  <td><a href="#ListTopupsReply.Status">ListTopupsReply.Status</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>partial</td>
-                  <td><a href="#PartialWithFees">PartialWithFees</a></td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>This is the pset with fees </p></td>
+                  <td><p>PSET signed with SIGHASH_ALL | ANYONECANPAY </p></td>
                 </tr>
               
                 <tr>
-                  <td>created_at</td>
-                  <td><a href="#int64">int64</a></td>
+                  <td>asset_hash</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>method</td>
-                  <td><a href="#Order.PaymentMethod">Order.PaymentMethod</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>the asset hash used as payout for bitcoin fees </p></td>
                 </tr>
               
                 <tr>
                   <td>asset_amount</td>
                   <td><a href="#uint64">uint64</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the asset denominated amount expressed in satoshis to be used as payout </p></td>
+                </tr>
+              
+                <tr>
+                  <td>asset_price</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>the price of bitcoin expressed in asset </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fee_amount</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>amount in satoshis of bitcoin needed to cover the fees </p></td>
+                </tr>
+              
+                <tr>
+                  <td>basis_point</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>the spread expressed in basis point on top the amount needed to repay for bitcoin fees </p></td>
+                </tr>
+              
+                <tr>
+                  <td>times</td>
+                  <td><a href="#Timestamps">Timestamps</a></td>
+                  <td></td>
+                  <td><p>the timestamps of each status change </p></td>
                 </tr>
               
             </tbody>
@@ -527,7 +386,7 @@
 
         
       
-        <h3 id=".PartialWithFees">PartialWithFees</h3>
+        <h3 id=".ListTopupsRequest">ListTopupsRequest</h3>
         <p></p>
 
         
@@ -538,10 +397,10 @@
             <tbody>
               
                 <tr>
-                  <td>pset</td>
+                  <td>asset_hash</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the asset hash to filetr the topups. If empty, all topups of all assets will be returned </p></td>
                 </tr>
               
             </tbody>
@@ -551,17 +410,48 @@
 
         
       
-        <h3 id=".TopupReply">TopupReply</h3>
+        <h3 id=".Timestamps">Timestamps</h3>
         <p></p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>requested_at</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>the unix timestamp of when the taxi received the request of a topup from a client </p></td>
+                </tr>
+              
+                <tr>
+                  <td>completed_at</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>the unix timestamp of when the taxi completed the topup and responded to client </p></td>
+                </tr>
+              
+                <tr>
+                  <td>settled_at</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>the unix timestamp of the block in wich the topup is included in the chain. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expired_at</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>the unix timestamp after wich the locked bitcoin input could have been double-spent (if any) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
 
-        
-      
-        <h3 id=".TopupRequest">TopupRequest</h3>
-        <p></p>
-
-        
+          
 
         
       
@@ -576,31 +466,45 @@
             <tbody>
               
                 <tr>
-                  <td>order</td>
-                  <td><a href="#Order">Order</a></td>
+                  <td>topup_id</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>random identifier of the currer topup </p></td>
                 </tr>
               
                 <tr>
-                  <td>asset_amount</td>
-                  <td><a href="#uint64">uint64</a></td>
+                  <td>partial</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>PSET signed with SIGHASH_ALL | ANYONECANPAY </p></td>
                 </tr>
               
                 <tr>
                   <td>asset_hash</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the asset hash used as payout for bitcoin fees </p></td>
+                </tr>
+              
+                <tr>
+                  <td>asset_amount</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>the asset denominated amount expressed in satoshis to be used as payout </p></td>
+                </tr>
+              
+                <tr>
+                  <td>basis_point</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>the spread expressed in basis point on top the amount needed to repay for bitcoin fees </p></td>
                 </tr>
               
                 <tr>
                   <td>expiry</td>
                   <td><a href="#uint64">uint64</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the unix timestamp after wich the locked LBTC input will provably be double-spent </p></td>
                 </tr>
               
             </tbody>
@@ -621,69 +525,17 @@
             <tbody>
               
                 <tr>
-                  <td>unsigned</td>
-                  <td><a href="#Unsigned">Unsigned</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>asset_hash</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>asset hash to be used for payout </p></td>
                 </tr>
               
                 <tr>
-                  <td>order_id</td>
-                  <td><a href="#string">string</a></td>
+                  <td>fee_amount</td>
+                  <td><a href="#uint64">uint64</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".TopupWithKeyReply">TopupWithKeyReply</h3>
-        <p></p>
-
-        
-
-        
-      
-        <h3 id=".TopupWithKeyRequest">TopupWithKeyRequest</h3>
-        <p></p>
-
-        
-
-        
-      
-        <h3 id=".Unsigned">Unsigned</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>pset</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>sat_per_byte</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>default 0.1 </p></td>
+                  <td><p>amount in satoshis of bitcoin needed to cover the fees. It&#39;s up to the client to estimate and ask the precise amount </p></td>
                 </tr>
               
             </tbody>
@@ -695,7 +547,7 @@
       
 
       
-        <h3 id=".Order.PaymentMethod">Order.PaymentMethod</h3>
+        <h3 id=".ListTopupsReply.Status">ListTopupsReply.Status</h3>
         <p></p>
         <table class="enum-table">
           <thead>
@@ -704,19 +556,19 @@
           <tbody>
             
               <tr>
-                <td>PAY_PER_USE</td>
+                <td>REQUESTED</td>
                 <td>0</td>
                 <td><p></p></td>
               </tr>
             
               <tr>
-                <td>API_KEY</td>
+                <td>COMPLETED</td>
                 <td>1</td>
                 <td><p></p></td>
               </tr>
             
               <tr>
-                <td>ASSET</td>
+                <td>SETTLED</td>
                 <td>2</td>
                 <td><p></p></td>
               </tr>
@@ -724,33 +576,36 @@
           </tbody>
         </table>
       
-        <h3 id=".Order.Status">Order.Status</h3>
+
+      
+
+      
+        <h3 id=".Admin">Admin</h3>
         <p></p>
         <table class="enum-table">
           <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
           </thead>
           <tbody>
             
               <tr>
-                <td>UNPAID</td>
-                <td>0</td>
-                <td><p></p></td>
+                <td>ListTopups</td>
+                <td><a href="#ListTopupsRequest">.ListTopupsRequest</a></td>
+                <td><a href="#ListTopupsReply">.ListTopupsReply</a></td>
+                <td><p>ListTopups returns all the internal topups</p></td>
               </tr>
             
               <tr>
-                <td>PAID</td>
-                <td>1</td>
-                <td><p></p></td>
+                <td>ChangeSpread</td>
+                <td><a href="#ChangeSpreadRequest">.ChangeSpreadRequest</a></td>
+                <td><a href="#ChangeSpreadReply">.ChangeSpreadReply</a></td>
+                <td><p>ChangeSpread updates the percentage taken as service fee</p></td>
               </tr>
             
           </tbody>
         </table>
-      
 
-      
-
-      
+        
         <h3 id=".Taxi">Taxi</h3>
         <p></p>
         <table class="enum-table">
@@ -760,47 +615,19 @@
           <tbody>
             
               <tr>
-                <td>Topup</td>
-                <td><a href="#TopupRequest">.TopupRequest</a></td>
-                <td><a href="#TopupReply">.TopupReply</a></td>
-                <td><p>The endpoint Topup it&#39;s called by the user without account and
-are willing to pay with Lightning Network.
-
-The process will returs a BOLT11 Lightning Invoice to be paid
-
-Once the LN invoice has been paid by the user the PSET with
-added LBTC fees could be found in the GetTopupResponse</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetTopup</td>
-                <td><a href="#GetTopupRequest">.GetTopupRequest</a></td>
-                <td><a href="#GetTopupReply">.GetTopupReply</a></td>
-                <td><p>The status of the topup can be fetched via GetTopup rpc.</p></td>
-              </tr>
-            
-              <tr>
-                <td>TopupWithKey</td>
-                <td><a href="#TopupWithKeyRequest">.TopupWithKeyRequest</a></td>
-                <td><a href="#TopupWithKeyReply">.TopupWithKeyReply</a></td>
-                <td><p>Recurrent users could signup for an account and obtains an
-API KEY that allows to programmatically invoke topups.</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetAssetEstimate</td>
-                <td><a href="#GetAssetEstimateRequest">.GetAssetEstimateRequest</a></td>
-                <td><a href="#GetAssetEstimateReply">.GetAssetEstimateReply</a></td>
-                <td><p>A subset of supported stablecoins could be accepted as payment
-for topups. Before calling the actual TopupWithAsset the user could
-call the GetAssetEstimate rpc</p></td>
+                <td>ListAssets</td>
+                <td><a href="#ListAssetsRequest">.ListAssetsRequest</a></td>
+                <td><a href="#ListAssetsReply">.ListAssetsReply</a></td>
+                <td><p>ListAssets rpc returns a subset of supported elements assets that could be accepted as payment
+for topups</p></td>
               </tr>
             
               <tr>
                 <td>TopupWithAsset</td>
                 <td><a href="#TopupWithAssetRequest">.TopupWithAssetRequest</a></td>
                 <td><a href="#TopupWithAssetReply">.TopupWithAssetReply</a></td>
-                <td><p></p></td>
+                <td><p>TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
+The transaction is signed with SIGHASH_ALL | ANYONECANPAY</p></td>
               </tr>
             
           </tbody>

@@ -1,91 +1,70 @@
 syntax = "proto3";
-option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/taxi";
+option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/trade";
 
 service Taxi {
-  // The endpoint Topup it's called by the user without account and
-  // are willing to pay with Lightning Network.
-  //
-  // The process will returs a BOLT11 Lightning Invoice to be paid
-  //
-  // Once the LN invoice has been paid by the user the PSET with
-  // added LBTC fees could be found in the GetTopupResponse
-  rpc Topup(TopupRequest) returns (TopupReply);
-
-  // The status of the topup can be fetched via GetTopup rpc.
-  rpc GetTopup(GetTopupRequest) returns (GetTopupReply);
-
-  // Recurrent users could signup for an account and obtains an
-  // API KEY that allows to programmatically invoke topups.
-  rpc TopupWithKey(TopupWithKeyRequest) returns (TopupWithKeyReply);
-
-  // A subset of supported stablecoins could be accepted as payment
-  // for topups. Before calling the actual TopupWithAsset the user could
-  // call the GetAssetEstimate rpc
-  rpc GetAssetEstimate(GetAssetEstimateRequest) returns (GetAssetEstimateReply);
+  // ListAssets rpc returns a subset of supported elements assets that could be accepted as payment
+  // for topups
+  rpc ListAssets(ListAssetsRequest) returns (ListAssetsReply);
+  // TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
+  // The transaction is signed with SIGHASH_ALL | ANYONECANPAY 
   rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetReply);
 }
 
-message TopupRequest {}
-message TopupReply {}
-message GetTopupRequest { string order_id = 1; }
-message GetTopupReply { Order order = 1; }
-message TopupWithKeyRequest {}
-message TopupWithKeyReply {}
-message GetAssetEstimateRequest {
-  Unsigned unsigned = 1;
-  string asset_hash = 2;
+service Admin {
+  // ListTopups returns all the internal topups
+  rpc ListTopups(ListTopupsRequest) returns (ListTopupsReply);
+  // ChangeSpread updates the percentage taken as service fee
+  rpc ChangeSpread(ChangeSpreadRequest) returns (ChangeSpreadReply);
 }
-message GetAssetEstimateReply {
-  Breakdown breakdown = 1;
-  uint64 asset_amount = 2;
-  string asset_hash = 3;
-  string order_id = 4;
+
+
+
+message ListAssetsRequest {};
+message ListAssetsReply {
+  repeated string asset_hash = 1; // asset hash accepted as payout
 }
 message TopupWithAssetRequest {
-  Unsigned unsigned = 1;
-  string asset_hash = 2;
-  string order_id = 3;
+  string asset_hash = 1; // asset hash to be used for payout
+  uint64 fee_amount = 2; // amount in satoshis of bitcoin needed to cover the fees. It's up to the client to estimate and ask the precise amount
 }
 message TopupWithAssetReply {
-  Order order = 1;
-  uint64 asset_amount = 2;
-  string asset_hash = 3;
-  uint64 expiry = 4;
+  string topup_id = 1; //random identifier of the currer topup
+  string partial = 2; // PSET signed with SIGHASH_ALL | ANYONECANPAY
+  string asset_hash = 3; // the asset hash used as payout for bitcoin fees
+  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout
+  int32 basis_point = 5; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+  uint64 expiry = 6; // the unix timestamp after wich the locked LBTC input will provably be double-spent
 }
 
-// Custom Types
 
-message Unsigned {
-  string pset = 1;
-  float sat_per_byte = 2; // default 0.1
+message ListTopupsRequest {
+  string asset_hash = 1; // the asset hash to filetr the topups. If empty, all topups of all assets will be returned
 }
-message PartialWithFees { string pset = 1; }
-message Order {
-  string order_id = 1;
+message ListTopupsReply {
+  string topup_id = 1; //random identifier of the currer topup
   enum Status {
-    UNPAID = 0;
-    PAID = 1;
+    REQUESTED = 0;
+    COMPLETED = 1;
+    SETTLED = 2;
   }
   Status status = 2;
-  bool is_completed = 3;
-  Unsigned unsigned = 4;
-  Breakdown breakdown = 5;
-  // This is the pset with fees
-  PartialWithFees partial = 6;
-  int64 created_at = 7;
-  enum PaymentMethod {
-    PAY_PER_USE = 0;
-    API_KEY = 1;
-    ASSET = 2;
-  }
-  PaymentMethod method = 8;
-  uint64 asset_amount = 9;
+  string partial = 3; // PSET signed with SIGHASH_ALL | ANYONECANPAY
+  string asset_hash = 4; // the asset hash used as payout for bitcoin fees
+  uint64 asset_amount = 5; // the asset denominated amount expressed in satoshis to be used as payout
+  float asset_price = 6; // the price of bitcoin expressed in asset
+  uint64 fee_amount = 7; // amount in satoshis of bitcoin needed to cover the fees
+  int32 basis_point = 8; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+  Timestamps times = 9; // the timestamps of each status change
 }
-message Breakdown {
-  uint64 size = 1;
-  float sat_per_byte = 2; // default 0.1
-  uint64 fee = 3;
-  float rate = 4;
-  uint64 spread = 5;
-  uint64 total = 6;
+
+message Timestamps {
+  uint64 requested_at = 1; // the unix timestamp of when the taxi received the request of a topup from a client
+  uint64 completed_at = 2; // the unix timestamp of when the taxi completed the topup and responded to client
+  uint64 settled_at = 3; // the unix timestamp of the block in wich the topup is included in the chain.
+  uint64 expired_at = 9; // the unix timestamp after wich the locked bitcoin input could have been double-spent (if any)
 }
+
+message ChangeSpreadRequest {
+  int32 basis_point = 1;
+}
+message ChangeSpreadReply {};

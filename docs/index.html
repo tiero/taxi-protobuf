@@ -207,6 +207,10 @@
                 </li>
               
                 <li>
+                  <a href="#.Topup"><span class="badge">M</span>Topup</a>
+                </li>
+              
+                <li>
                   <a href="#.TopupWithAssetReply"><span class="badge">M</span>TopupWithAssetReply</a>
                 </li>
               
@@ -317,10 +321,10 @@
             <tbody>
               
                 <tr>
-                  <td>topup_id</td>
-                  <td><a href="#string">string</a></td>
+                  <td>topup</td>
+                  <td><a href="#Topup">Topup</a></td>
                   <td></td>
-                  <td><p>random identifier of the currer topup </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
@@ -331,34 +335,6 @@
                 </tr>
               
                 <tr>
-                  <td>partial</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>PSET signed with SIGHASH_ALL | ANYONECANPAY </p></td>
-                </tr>
-              
-                <tr>
-                  <td>asset_hash</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>the asset hash used as payout for bitcoin fees </p></td>
-                </tr>
-              
-                <tr>
-                  <td>asset_amount</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee </p></td>
-                </tr>
-              
-                <tr>
-                  <td>asset_price</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>the price of bitcoin expressed in asset </p></td>
-                </tr>
-              
-                <tr>
                   <td>fee_amount</td>
                   <td><a href="#uint64">uint64</a></td>
                   <td></td>
@@ -366,10 +342,10 @@
                 </tr>
               
                 <tr>
-                  <td>basis_point</td>
-                  <td><a href="#int32">int32</a></td>
+                  <td>millisat_per_byte</td>
+                  <td><a href="#uint64">uint64</a></td>
                   <td></td>
-                  <td><p>the spread expressed in basis point on top the amount needed to repay for bitcoin fees </p></td>
+                  <td><p>how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 </p></td>
                 </tr>
               
                 <tr>
@@ -455,7 +431,7 @@
 
         
       
-        <h3 id=".TopupWithAssetReply">TopupWithAssetReply</h3>
+        <h3 id=".Topup">Topup</h3>
         <p></p>
 
         
@@ -494,10 +470,41 @@
                 </tr>
               
                 <tr>
+                  <td>asset_price</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>the price of bitcoin expressed in asset </p></td>
+                </tr>
+              
+                <tr>
                   <td>basis_point</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p>the spread expressed in basis point on top the amount needed to repay for bitcoin fees </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id=".TopupWithAssetReply">TopupWithAssetReply</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>topup</td>
+                  <td><a href="#Topup">Topup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
@@ -538,6 +545,13 @@
                   <td><p>amount in satoshis of bitcoin needed to cover the fees. It&#39;s up to the client to estimate and ask the precise amount </p></td>
                 </tr>
               
+                <tr>
+                  <td>millisat_per_byte</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -558,19 +572,19 @@
               <tr>
                 <td>REQUESTED</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>when the request for a topup has been received by the taxi</p></td>
               </tr>
             
               <tr>
                 <td>COMPLETED</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>when the reply with a partially signed topup has been delivered to the client</p></td>
               </tr>
             
               <tr>
                 <td>SETTLED</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>when the topup has been included in the blockchain</p></td>
               </tr>
             
           </tbody>

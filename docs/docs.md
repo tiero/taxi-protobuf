@@ -11,6 +11,7 @@
     - [ListTopupsReply](#.ListTopupsReply)
     - [ListTopupsRequest](#.ListTopupsRequest)
     - [Timestamps](#.Timestamps)
+    - [Topup](#.Topup)
     - [TopupWithAssetReply](#.TopupWithAssetReply)
     - [TopupWithAssetRequest](#.TopupWithAssetRequest)
   
@@ -88,14 +89,10 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topup_id | [string](#string) |  | random identifier of the currer topup |
+| topup | [Topup](#Topup) |  |  |
 | status | [ListTopupsReply.Status](#ListTopupsReply.Status) |  |  |
-| partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
-| asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
-| asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
-| asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
 | fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees |
-| basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
+| millisat_per_byte | [uint64](#uint64) |  | how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 |
 | times | [Timestamps](#Timestamps) |  | the timestamps of each status change |
 
 
@@ -136,9 +133,9 @@
 
 
 
-<a name=".TopupWithAssetReply"></a>
+<a name=".Topup"></a>
 
-### TopupWithAssetReply
+### Topup
 
 
 
@@ -148,7 +145,23 @@
 | partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
 | asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
 | asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
+| asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
 | basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
+
+
+
+
+
+
+<a name=".TopupWithAssetReply"></a>
+
+### TopupWithAssetReply
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| topup | [Topup](#Topup) |  |  |
 | expiry | [uint64](#uint64) |  | the unix timestamp after wich the locked LBTC input will provably be double-spent |
 
 
@@ -166,6 +179,7 @@
 | ----- | ---- | ----- | ----------- |
 | asset_hash | [string](#string) |  | asset hash to be used for payout |
 | fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees. It&#39;s up to the client to estimate and ask the precise amount |
+| millisat_per_byte | [uint64](#uint64) |  | how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 |
 
 
 
@@ -181,9 +195,9 @@
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| REQUESTED | 0 |  |
-| COMPLETED | 1 |  |
-| SETTLED | 2 |  |
+| REQUESTED | 0 | when the request for a topup has been received by the taxi |
+| COMPLETED | 1 | when the reply with a partially signed topup has been delivered to the client |
+| SETTLED | 2 | when the topup has been included in the blockchain |
 
 
  

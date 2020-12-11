@@ -45,10 +45,9 @@ message ListTopupsReply {
     SETTLED = 2; // when the topup has been included in the blockchain
   }
   Status status = 2;
-  float asset_price = 3; // the price of bitcoin expressed in asset
-  uint64 fee_amount = 4; // amount in satoshis of bitcoin needed to cover the fees
-  uint64 millisat_per_byte = 5; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
-  Timestamps times = 6; // the timestamps of each status change
+  uint64 fee_amount = 3; // amount in satoshis of bitcoin needed to cover the fees
+  uint64 millisat_per_byte = 4; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
+  Timestamps times = 5; // the timestamps of each status change
 }
 
 message ChangeSpreadRequest {
@@ -61,7 +60,8 @@ message Topup {
   string partial = 2; // PSET signed with SIGHASH_ALL | ANYONECANPAY
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-  int32 basis_point = 5; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+  float asset_price = 5; // the price of bitcoin expressed in asset
+  int32 basis_point = 6; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
 }
 message Timestamps {
   uint64 requested_at = 1; // the unix timestamp of when the taxi received the request of a topup from a client

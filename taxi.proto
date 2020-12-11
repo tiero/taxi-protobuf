@@ -29,12 +29,8 @@ message TopupWithAssetRequest {
   uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
 }
 message TopupWithAssetReply {
-  string topup_id = 1; //random identifier of the currer topup
-  string partial = 2; // PSET signed with SIGHASH_ALL | ANYONECANPAY
-  string asset_hash = 3; // the asset hash used as payout for bitcoin fees
-  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-  int32 basis_point = 5; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
-  uint64 expiry = 6; // the unix timestamp after wich the locked LBTC input will provably be double-spent
+  Topup topup = 1;
+  uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will provably be double-spent
 }
 
 
@@ -42,30 +38,34 @@ message ListTopupsRequest {
   string asset_hash = 1; // the asset hash to filetr the topups. If empty, all topups of all assets will be returned
 }
 message ListTopupsReply {
-  string topup_id = 1; //random identifier of the currer topup
+  Topup topup = 1;
   enum Status {
-    REQUESTED = 0;
-    COMPLETED = 1;
-    SETTLED = 2;
+    REQUESTED = 0; // when the request for a topup has been received by the taxi
+    COMPLETED = 1; // when the reply with a partially signed topup has been delivered to the client 
+    SETTLED = 2; // when the topup has been included in the blockchain
   }
   Status status = 2;
-  string partial = 3; // PSET signed with SIGHASH_ALL | ANYONECANPAY
-  string asset_hash = 4; // the asset hash used as payout for bitcoin fees
-  uint64 asset_amount = 5; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-  float asset_price = 6; // the price of bitcoin expressed in asset
-  uint64 fee_amount = 7; // amount in satoshis of bitcoin needed to cover the fees
-  int32 basis_point = 8; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
-  Timestamps times = 9; // the timestamps of each status change
-}
-
-message Timestamps {
-  uint64 requested_at = 1; // the unix timestamp of when the taxi received the request of a topup from a client
-  uint64 completed_at = 2; // the unix timestamp of when the taxi completed the topup and responded to client
-  uint64 settled_at = 3; // the unix timestamp of the block in wich the topup is included in the chain.
-  uint64 expired_at = 9; // the unix timestamp after wich the locked bitcoin input could have been double-spent (if any)
+  float asset_price = 3; // the price of bitcoin expressed in asset
+  uint64 fee_amount = 4; // amount in satoshis of bitcoin needed to cover the fees
+  uint64 millisat_per_byte = 5; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
+  Timestamps times = 6; // the timestamps of each status change
 }
 
 message ChangeSpreadRequest {
   int32 basis_point = 1;
 }
 message ChangeSpreadReply {};
+
+message Topup {
+  string topup_id = 1; //random identifier of the currer topup
+  string partial = 2; // PSET signed with SIGHASH_ALL | ANYONECANPAY
+  string asset_hash = 3; // the asset hash used as payout for bitcoin fees
+  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
+  int32 basis_point = 5; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+}
+message Timestamps {
+  uint64 requested_at = 1; // the unix timestamp of when the taxi received the request of a topup from a client
+  uint64 completed_at = 2; // the unix timestamp of when the taxi completed the topup and responded to client
+  uint64 settled_at = 3; // the unix timestamp of the block in wich the topup is included in the chain.
+  uint64 expired_at = 9; // the unix timestamp after wich the locked bitcoin input could have been double-spent (if any)
+}

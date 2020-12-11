@@ -1,7 +1,5 @@
 syntax = "proto3";
-
-package vulpemventures.liquid_taxi.taxi;
-option go_package = "rpc/taxi";
+option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/taxi";
 
 service Taxi {
   // The endpoint Topup it's called by the user without account and

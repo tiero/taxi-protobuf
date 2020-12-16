@@ -211,6 +211,10 @@
                 </li>
               
                 <li>
+                  <a href="#.TopupInfo"><span class="badge">M</span>TopupInfo</a>
+                </li>
+              
+                <li>
                   <a href="#.TopupWithAssetReply"><span class="badge">M</span>TopupWithAssetReply</a>
                 </li>
               
@@ -220,7 +224,7 @@
               
               
                 <li>
-                  <a href="#.ListTopupsReply.Status"><span class="badge">E</span>ListTopupsReply.Status</a>
+                  <a href="#.TopupInfo.Status"><span class="badge">E</span>TopupInfo.Status</a>
                 </li>
               
               
@@ -321,38 +325,10 @@
             <tbody>
               
                 <tr>
-                  <td>topup</td>
-                  <td><a href="#Topup">Topup</a></td>
-                  <td></td>
+                  <td>topups</td>
+                  <td><a href="#TopupInfo">TopupInfo</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#ListTopupsReply.Status">ListTopupsReply.Status</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>fee_amount</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>amount in satoshis of bitcoin needed to cover the fees </p></td>
-                </tr>
-              
-                <tr>
-                  <td>millisat_per_byte</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 </p></td>
-                </tr>
-              
-                <tr>
-                  <td>times</td>
-                  <td><a href="#Timestamps">Timestamps</a></td>
-                  <td></td>
-                  <td><p>the timestamps of each status change </p></td>
                 </tr>
               
             </tbody>
@@ -490,6 +466,58 @@
 
         
       
+        <h3 id=".TopupInfo">TopupInfo</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>topup</td>
+                  <td><a href="#Topup">Topup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#TopupInfo.Status">TopupInfo.Status</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fee_amount</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>amount in satoshis of bitcoin needed to cover the fees </p></td>
+                </tr>
+              
+                <tr>
+                  <td>millisat_per_byte</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>times</td>
+                  <td><a href="#Timestamps">Timestamps</a></td>
+                  <td></td>
+                  <td><p>the timestamps of each status change </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id=".TopupWithAssetReply">TopupWithAssetReply</h3>
         <p></p>
 
@@ -561,7 +589,7 @@
       
 
       
-        <h3 id=".ListTopupsReply.Status">ListTopupsReply.Status</h3>
+        <h3 id=".TopupInfo.Status">TopupInfo.Status</h3>
         <p></p>
         <table class="enum-table">
           <thead>

@@ -12,10 +12,11 @@
     - [ListTopupsRequest](#.ListTopupsRequest)
     - [Timestamps](#.Timestamps)
     - [Topup](#.Topup)
+    - [TopupInfo](#.TopupInfo)
     - [TopupWithAssetReply](#.TopupWithAssetReply)
     - [TopupWithAssetRequest](#.TopupWithAssetRequest)
   
-    - [ListTopupsReply.Status](#.ListTopupsReply.Status)
+    - [TopupInfo.Status](#.TopupInfo.Status)
   
     - [Admin](#.Admin)
     - [Taxi](#.Taxi)
@@ -89,11 +90,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topup | [Topup](#Topup) |  |  |
-| status | [ListTopupsReply.Status](#ListTopupsReply.Status) |  |  |
-| fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees |
-| millisat_per_byte | [uint64](#uint64) |  | how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 |
-| times | [Timestamps](#Timestamps) |  | the timestamps of each status change |
+| topups | [TopupInfo](#TopupInfo) | repeated |  |
 
 
 
@@ -153,6 +150,25 @@
 
 
 
+<a name=".TopupInfo"></a>
+
+### TopupInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| topup | [Topup](#Topup) |  |  |
+| status | [TopupInfo.Status](#TopupInfo.Status) |  |  |
+| fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees |
+| millisat_per_byte | [uint64](#uint64) |  | how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 |
+| times | [Timestamps](#Timestamps) |  | the timestamps of each status change |
+
+
+
+
+
+
 <a name=".TopupWithAssetReply"></a>
 
 ### TopupWithAssetReply
@@ -188,9 +204,9 @@
  
 
 
-<a name=".ListTopupsReply.Status"></a>
+<a name=".TopupInfo.Status"></a>
 
-### ListTopupsReply.Status
+### TopupInfo.Status
 
 
 | Name | Number | Description |

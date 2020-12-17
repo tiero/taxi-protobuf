@@ -15,9 +15,18 @@ service Admin {
   rpc ListTopups(ListTopupsRequest) returns (ListTopupsReply);
   // ChangeSpread updates the percentage taken as service fee
   rpc ChangeSpread(ChangeSpreadRequest) returns (ChangeSpreadReply);
+  // AddAsset lets to add a new asset to support
+  rpc AddAsset(AddAssetRequest) returns (AddAssetReply);
 }
 
+message AddAssetRequest {
+  string asset_hash = 1;
+  string ticker = 2;
+}
 
+message AddAssetReply {
+  bool success = 1;
+}
 
 message ListAssetsRequest {};
 message ListAssetsReply {

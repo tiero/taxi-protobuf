@@ -11,7 +11,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+const _ = grpc.SupportPackageIsVersion7
 
 // TaxiClient is the client API for Taxi service.
 //
@@ -68,16 +68,23 @@ type TaxiServer interface {
 type UnimplementedTaxiServer struct {
 }
 
-func (*UnimplementedTaxiServer) ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsReply, error) {
+func (UnimplementedTaxiServer) ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAssets not implemented")
 }
-func (*UnimplementedTaxiServer) TopupWithAsset(context.Context, *TopupWithAssetRequest) (*TopupWithAssetReply, error) {
+func (UnimplementedTaxiServer) TopupWithAsset(context.Context, *TopupWithAssetRequest) (*TopupWithAssetReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TopupWithAsset not implemented")
 }
-func (*UnimplementedTaxiServer) mustEmbedUnimplementedTaxiServer() {}
+func (UnimplementedTaxiServer) mustEmbedUnimplementedTaxiServer() {}
 
-func RegisterTaxiServer(s *grpc.Server, srv TaxiServer) {
-	s.RegisterService(&_Taxi_serviceDesc, srv)
+// UnsafeTaxiServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TaxiServer will
+// result in compilation errors.
+type UnsafeTaxiServer interface {
+	mustEmbedUnimplementedTaxiServer()
+}
+
+func RegisterTaxiServer(s grpc.ServiceRegistrar, srv TaxiServer) {
+	s.RegisterService(&Taxi_ServiceDesc, srv)
 }
 
 func _Taxi_ListAssets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -116,7 +123,10 @@ func _Taxi_TopupWithAsset_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Taxi_serviceDesc = grpc.ServiceDesc{
+// Taxi_ServiceDesc is the grpc.ServiceDesc for Taxi service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Taxi_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Taxi",
 	HandlerType: (*TaxiServer)(nil),
 	Methods: []grpc.MethodDesc{
@@ -141,6 +151,8 @@ type AdminClient interface {
 	ListTopups(ctx context.Context, in *ListTopupsRequest, opts ...grpc.CallOption) (*ListTopupsReply, error)
 	// ChangeSpread updates the percentage taken as service fee
 	ChangeSpread(ctx context.Context, in *ChangeSpreadRequest, opts ...grpc.CallOption) (*ChangeSpreadReply, error)
+	// AddAsset lets to add a new asset to support
+	AddAsset(ctx context.Context, in *AddAssetRequest, opts ...grpc.CallOption) (*AddAssetReply, error)
 }
 
 type adminClient struct {
@@ -169,6 +181,15 @@ func (c *adminClient) ChangeSpread(ctx context.Context, in *ChangeSpreadRequest,
 	return out, nil
 }
 
+func (c *adminClient) AddAsset(ctx context.Context, in *AddAssetRequest, opts ...grpc.CallOption) (*AddAssetReply, error) {
+	out := new(AddAssetReply)
+	err := c.cc.Invoke(ctx, "/Admin/AddAsset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -177,6 +198,8 @@ type AdminServer interface {
 	ListTopups(context.Context, *ListTopupsRequest) (*ListTopupsReply, error)
 	// ChangeSpread updates the percentage taken as service fee
 	ChangeSpread(context.Context, *ChangeSpreadRequest) (*ChangeSpreadReply, error)
+	// AddAsset lets to add a new asset to support
+	AddAsset(context.Context, *AddAssetRequest) (*AddAssetReply, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -184,16 +207,26 @@ type AdminServer interface {
 type UnimplementedAdminServer struct {
 }
 
-func (*UnimplementedAdminServer) ListTopups(context.Context, *ListTopupsRequest) (*ListTopupsReply, error) {
+func (UnimplementedAdminServer) ListTopups(context.Context, *ListTopupsRequest) (*ListTopupsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTopups not implemented")
 }
-func (*UnimplementedAdminServer) ChangeSpread(context.Context, *ChangeSpreadRequest) (*ChangeSpreadReply, error) {
+func (UnimplementedAdminServer) ChangeSpread(context.Context, *ChangeSpreadRequest) (*ChangeSpreadReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeSpread not implemented")
 }
-func (*UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
+func (UnimplementedAdminServer) AddAsset(context.Context, *AddAssetRequest) (*AddAssetReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAsset not implemented")
+}
+func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
-func RegisterAdminServer(s *grpc.Server, srv AdminServer) {
-	s.RegisterService(&_Admin_serviceDesc, srv)
+// UnsafeAdminServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AdminServer will
+// result in compilation errors.
+type UnsafeAdminServer interface {
+	mustEmbedUnimplementedAdminServer()
+}
+
+func RegisterAdminServer(s grpc.ServiceRegistrar, srv AdminServer) {
+	s.RegisterService(&Admin_ServiceDesc, srv)
 }
 
 func _Admin_ListTopups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -232,7 +265,28 @@ func _Admin_ChangeSpread_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Admin_serviceDesc = grpc.ServiceDesc{
+func _Admin_AddAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).AddAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Admin/AddAsset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).AddAsset(ctx, req.(*AddAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Admin_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Admin",
 	HandlerType: (*AdminServer)(nil),
 	Methods: []grpc.MethodDesc{
@@ -243,6 +297,10 @@ var _Admin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeSpread",
 			Handler:    _Admin_ChangeSpread_Handler,
+		},
+		{
+			MethodName: "AddAsset",
+			Handler:    _Admin_AddAsset_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

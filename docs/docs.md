@@ -4,6 +4,8 @@
 ## Table of Contents
 
 - [taxi.proto](#taxi.proto)
+    - [AddAssetReply](#.AddAssetReply)
+    - [AddAssetRequest](#.AddAssetRequest)
     - [ChangeSpreadReply](#.ChangeSpreadReply)
     - [ChangeSpreadRequest](#.ChangeSpreadRequest)
     - [ListAssetsReply](#.ListAssetsReply)
@@ -29,6 +31,32 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## taxi.proto
+
+
+
+<a name=".AddAssetReply"></a>
+
+### AddAssetReply
+
+
+
+
+
+
+
+<a name=".AddAssetRequest"></a>
+
+### AddAssetRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| asset_hash | [string](#string) |  | The asset_hash to update (or to create if the taxi doesn&#39;t know it) |
+| price | [float](#float) |  | The current prive for the given asset hash |
+
+
+
 
 
 
@@ -230,6 +258,7 @@
 | ----------- | ------------ | ------------- | ------------|
 | ListTopups | [.ListTopupsRequest](#ListTopupsRequest) | [.ListTopupsReply](#ListTopupsReply) | ListTopups returns all the internal topups |
 | ChangeSpread | [.ChangeSpreadRequest](#ChangeSpreadRequest) | [.ChangeSpreadReply](#ChangeSpreadReply) | ChangeSpread updates the percentage taken as service fee |
+| AddAsset | [.AddAssetRequest](#AddAssetRequest) | [.AddAssetReply](#AddAssetReply) | AddAsset lets update the asset_hash with price if exists, or creates it |
 
 
 <a name=".Taxi"></a>

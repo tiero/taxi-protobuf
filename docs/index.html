@@ -179,6 +179,14 @@
             <ul>
               
                 <li>
+                  <a href="#.AddAssetReply"><span class="badge">M</span>AddAssetReply</a>
+                </li>
+              
+                <li>
+                  <a href="#.AddAssetRequest"><span class="badge">M</span>AddAssetRequest</a>
+                </li>
+              
+                <li>
                   <a href="#.ChangeSpreadReply"><span class="badge">M</span>ChangeSpreadReply</a>
                 </li>
               
@@ -251,6 +259,44 @@
       </div>
       <p></p>
 
+      
+        <h3 id=".AddAssetReply">AddAssetReply</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id=".AddAssetRequest">AddAssetRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>asset_hash</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The asset_hash to update (or to create if the taxi doesn&#39;t know it) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>price</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>The current prive for the given asset hash </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
       
         <h3 id=".ChangeSpreadReply">ChangeSpreadReply</h3>
         <p></p>
@@ -642,6 +688,13 @@
                 <td><a href="#ChangeSpreadRequest">.ChangeSpreadRequest</a></td>
                 <td><a href="#ChangeSpreadReply">.ChangeSpreadReply</a></td>
                 <td><p>ChangeSpread updates the percentage taken as service fee</p></td>
+              </tr>
+            
+              <tr>
+                <td>AddAsset</td>
+                <td><a href="#AddAssetRequest">.AddAssetRequest</a></td>
+                <td><a href="#AddAssetReply">.AddAssetReply</a></td>
+                <td><p>AddAsset lets update the asset_hash with price if exists, or creates it</p></td>
               </tr>
             
           </tbody>

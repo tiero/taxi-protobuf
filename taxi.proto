@@ -15,16 +15,16 @@ service Admin {
   rpc ListTopups(ListTopupsRequest) returns (ListTopupsReply);
   // ChangeSpread updates the percentage taken as service fee
   rpc ChangeSpread(ChangeSpreadRequest) returns (ChangeSpreadReply);
-  // UpdateOrCreateAsset lets update the asset_hash with price if exists, or creates it
-  rpc UpdateOrCreateAsset(UpdateOrCreateAssetRequest) returns (UpdateOrCreateAssetReply);
+  // AddAsset lets update the asset_hash with price if exists, or creates it
+  rpc AddAsset(AddAssetRequest) returns (AddAssetReply);
 }
 
-message UpdateOrCreateAssetRequest {
+message AddAssetRequest {
   string asset_hash = 1; // The asset_hash to update (or to create if the taxi doesn't know it)
   float price = 2; // The current prive for the given asset hash
 }
 
-message UpdateOrCreateAssetReply {}
+message AddAssetReply {}
 
 message ListAssetsRequest {}
 message ListAssetsReply {

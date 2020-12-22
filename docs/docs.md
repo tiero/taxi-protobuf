@@ -4,23 +4,12 @@
 ## Table of Contents
 
 - [taxi.proto](#taxi.proto)
-    - [AddAssetReply](#.AddAssetReply)
-    - [AddAssetRequest](#.AddAssetRequest)
-    - [ChangeSpreadReply](#.ChangeSpreadReply)
-    - [ChangeSpreadRequest](#.ChangeSpreadRequest)
     - [ListAssetsReply](#.ListAssetsReply)
     - [ListAssetsRequest](#.ListAssetsRequest)
-    - [ListTopupsReply](#.ListTopupsReply)
-    - [ListTopupsRequest](#.ListTopupsRequest)
-    - [Timestamps](#.Timestamps)
     - [Topup](#.Topup)
-    - [TopupInfo](#.TopupInfo)
     - [TopupWithAssetReply](#.TopupWithAssetReply)
     - [TopupWithAssetRequest](#.TopupWithAssetRequest)
   
-    - [TopupInfo.Status](#.TopupInfo.Status)
-  
-    - [Admin](#.Admin)
     - [Taxi](#.Taxi)
   
 - [Scalar Value Types](#scalar-value-types)
@@ -31,57 +20,6 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## taxi.proto
-
-
-
-<a name=".AddAssetReply"></a>
-
-### AddAssetReply
-
-
-
-
-
-
-
-<a name=".AddAssetRequest"></a>
-
-### AddAssetRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| asset_hash | [string](#string) |  | The asset_hash to update (or to create if the taxi doesn&#39;t know it) |
-| price | [float](#float) |  | The current prive for the given asset hash |
-
-
-
-
-
-
-<a name=".ChangeSpreadReply"></a>
-
-### ChangeSpreadReply
-
-
-
-
-
-
-
-<a name=".ChangeSpreadRequest"></a>
-
-### ChangeSpreadRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| basis_point | [int32](#int32) |  |  |
-
-
-
 
 
 
@@ -110,54 +48,6 @@
 
 
 
-<a name=".ListTopupsReply"></a>
-
-### ListTopupsReply
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topups | [TopupInfo](#TopupInfo) | repeated |  |
-
-
-
-
-
-
-<a name=".ListTopupsRequest"></a>
-
-### ListTopupsRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| asset_hash | [string](#string) |  | the asset hash to filetr the topups. If empty, all topups of all assets will be returned |
-
-
-
-
-
-
-<a name=".Timestamps"></a>
-
-### Timestamps
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| requested_at | [uint64](#uint64) |  | the unix timestamp of when the taxi received the request of a topup from a client |
-| completed_at | [uint64](#uint64) |  | the unix timestamp of when the taxi completed the topup and responded to client |
-| settled_at | [uint64](#uint64) |  | the unix timestamp of the block in wich the topup is included in the chain. |
-| expired_at | [uint64](#uint64) |  | the unix timestamp after wich the locked bitcoin input could have been double-spent (if any) |
-
-
-
-
-
-
 <a name=".Topup"></a>
 
 ### Topup
@@ -172,25 +62,6 @@
 | asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
 | asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
 | basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
-
-
-
-
-
-
-<a name=".TopupInfo"></a>
-
-### TopupInfo
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topup | [Topup](#Topup) |  |  |
-| status | [TopupInfo.Status](#TopupInfo.Status) |  |  |
-| fee_amount | [uint64](#uint64) |  | amount in satoshis of bitcoin needed to cover the fees |
-| millisat_per_byte | [uint64](#uint64) |  | how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 |
-| times | [Timestamps](#Timestamps) |  | the timestamps of each status change |
 
 
 
@@ -231,34 +102,9 @@
 
  
 
-
-<a name=".TopupInfo.Status"></a>
-
-### TopupInfo.Status
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| REQUESTED | 0 | when the request for a topup has been received by the taxi |
-| COMPLETED | 1 | when the reply with a partially signed topup has been delivered to the client |
-| SETTLED | 2 | when the topup has been included in the blockchain |
-
-
  
 
  
-
-
-<a name=".Admin"></a>
-
-### Admin
-
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| ListTopups | [.ListTopupsRequest](#ListTopupsRequest) | [.ListTopupsReply](#ListTopupsReply) | ListTopups returns all the internal topups |
-| ChangeSpread | [.ChangeSpreadRequest](#ChangeSpreadRequest) | [.ChangeSpreadReply](#ChangeSpreadReply) | ChangeSpread updates the percentage taken as service fee |
-| AddAsset | [.AddAssetRequest](#AddAssetRequest) | [.AddAssetReply](#AddAssetReply) | AddAsset lets update the asset_hash with price if exists, or creates it |
 
 
 <a name=".Taxi"></a>

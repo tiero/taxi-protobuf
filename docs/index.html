@@ -179,22 +179,6 @@
             <ul>
               
                 <li>
-                  <a href="#.AddAssetReply"><span class="badge">M</span>AddAssetReply</a>
-                </li>
-              
-                <li>
-                  <a href="#.AddAssetRequest"><span class="badge">M</span>AddAssetRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#.ChangeSpreadReply"><span class="badge">M</span>ChangeSpreadReply</a>
-                </li>
-              
-                <li>
-                  <a href="#.ChangeSpreadRequest"><span class="badge">M</span>ChangeSpreadRequest</a>
-                </li>
-              
-                <li>
                   <a href="#.ListAssetsReply"><span class="badge">M</span>ListAssetsReply</a>
                 </li>
               
@@ -203,23 +187,7 @@
                 </li>
               
                 <li>
-                  <a href="#.ListTopupsReply"><span class="badge">M</span>ListTopupsReply</a>
-                </li>
-              
-                <li>
-                  <a href="#.ListTopupsRequest"><span class="badge">M</span>ListTopupsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#.Timestamps"><span class="badge">M</span>Timestamps</a>
-                </li>
-              
-                <li>
                   <a href="#.Topup"><span class="badge">M</span>Topup</a>
-                </li>
-              
-                <li>
-                  <a href="#.TopupInfo"><span class="badge">M</span>TopupInfo</a>
                 </li>
               
                 <li>
@@ -231,15 +199,7 @@
                 </li>
               
               
-                <li>
-                  <a href="#.TopupInfo.Status"><span class="badge">E</span>TopupInfo.Status</a>
-                </li>
               
-              
-              
-                <li>
-                  <a href="#.Admin"><span class="badge">S</span>Admin</a>
-                </li>
               
                 <li>
                   <a href="#.Taxi"><span class="badge">S</span>Taxi</a>
@@ -259,75 +219,6 @@
       </div>
       <p></p>
 
-      
-        <h3 id=".AddAssetReply">AddAssetReply</h3>
-        <p></p>
-
-        
-
-        
-      
-        <h3 id=".AddAssetRequest">AddAssetRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>asset_hash</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The asset_hash to update (or to create if the taxi doesn&#39;t know it) </p></td>
-                </tr>
-              
-                <tr>
-                  <td>price</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>The current prive for the given asset hash </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".ChangeSpreadReply">ChangeSpreadReply</h3>
-        <p></p>
-
-        
-
-        
-      
-        <h3 id=".ChangeSpreadRequest">ChangeSpreadRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>basis_point</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
       
         <h3 id=".ListAssetsReply">ListAssetsReply</h3>
         <p></p>
@@ -357,99 +248,6 @@
         <p></p>
 
         
-
-        
-      
-        <h3 id=".ListTopupsReply">ListTopupsReply</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>topups</td>
-                  <td><a href="#TopupInfo">TopupInfo</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".ListTopupsRequest">ListTopupsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>asset_hash</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>the asset hash to filetr the topups. If empty, all topups of all assets will be returned </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".Timestamps">Timestamps</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>requested_at</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>the unix timestamp of when the taxi received the request of a topup from a client </p></td>
-                </tr>
-              
-                <tr>
-                  <td>completed_at</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>the unix timestamp of when the taxi completed the topup and responded to client </p></td>
-                </tr>
-              
-                <tr>
-                  <td>settled_at</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>the unix timestamp of the block in wich the topup is included in the chain. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>expired_at</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>the unix timestamp after wich the locked bitcoin input could have been double-spent (if any) </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
 
         
       
@@ -503,58 +301,6 @@
                   <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p>the spread expressed in basis point on top the amount needed to repay for bitcoin fees </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id=".TopupInfo">TopupInfo</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>topup</td>
-                  <td><a href="#Topup">Topup</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#TopupInfo.Status">TopupInfo.Status</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>fee_amount</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>amount in satoshis of bitcoin needed to cover the fees </p></td>
-                </tr>
-              
-                <tr>
-                  <td>millisat_per_byte</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p>how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100 </p></td>
-                </tr>
-              
-                <tr>
-                  <td>times</td>
-                  <td><a href="#Timestamps">Timestamps</a></td>
-                  <td></td>
-                  <td><p>the timestamps of each status change </p></td>
                 </tr>
               
             </tbody>
@@ -635,72 +381,10 @@
       
 
       
-        <h3 id=".TopupInfo.Status">TopupInfo.Status</h3>
-        <p></p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>REQUESTED</td>
-                <td>0</td>
-                <td><p>when the request for a topup has been received by the taxi</p></td>
-              </tr>
-            
-              <tr>
-                <td>COMPLETED</td>
-                <td>1</td>
-                <td><p>when the reply with a partially signed topup has been delivered to the client</p></td>
-              </tr>
-            
-              <tr>
-                <td>SETTLED</td>
-                <td>2</td>
-                <td><p>when the topup has been included in the blockchain</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
 
       
 
       
-        <h3 id=".Admin">Admin</h3>
-        <p></p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>ListTopups</td>
-                <td><a href="#ListTopupsRequest">.ListTopupsRequest</a></td>
-                <td><a href="#ListTopupsReply">.ListTopupsReply</a></td>
-                <td><p>ListTopups returns all the internal topups</p></td>
-              </tr>
-            
-              <tr>
-                <td>ChangeSpread</td>
-                <td><a href="#ChangeSpreadRequest">.ChangeSpreadRequest</a></td>
-                <td><a href="#ChangeSpreadReply">.ChangeSpreadReply</a></td>
-                <td><p>ChangeSpread updates the percentage taken as service fee</p></td>
-              </tr>
-            
-              <tr>
-                <td>AddAsset</td>
-                <td><a href="#AddAssetRequest">.AddAssetRequest</a></td>
-                <td><a href="#AddAssetReply">.AddAssetReply</a></td>
-                <td><p>AddAsset lets update the asset_hash with price if exists, or creates it</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-
-        
         <h3 id=".Taxi">Taxi</h3>
         <p></p>
         <table class="enum-table">

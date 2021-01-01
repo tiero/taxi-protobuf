@@ -6,7 +6,7 @@ service Taxi {
   // for topups
   rpc ListAssets(ListAssetsRequest) returns (ListAssetsReply);
   // TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
-  // The transaction is signed with SIGHASH_ALL | ANYONECANPAY 
+  // The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY 
   rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetReply);
 }
 
@@ -26,7 +26,7 @@ message TopupWithAssetReply {
 
 message Topup {
   string topup_id = 1; //random identifier of the currer topup
-  string partial = 2; // PSET signed with SIGHASH_ALL | ANYONECANPAY
+  string partial = 2; // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
   float asset_price = 5; // the price of bitcoin expressed in asset

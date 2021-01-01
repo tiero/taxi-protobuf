@@ -15,6 +15,13 @@ Build for Go
 $ make go
 ```
 
+Build for JavaScript
+
+```sh
+$ make js
+```
+
+
 
 ## Documentation
 
@@ -29,5 +36,13 @@ $ make doc
 ### Go 
 
 ```sh
-$ go get github.com/tdex-network/tdex-protobuf
+$ go get github.com/vulpemventures/taxi-protobuf
+```
+
+### JavaScript 
+
+```sh
+$ npm i vulpemventures/taxi-protobuf
+# or with yarn
+$ yarn add vulpemventures/taxi-protobuf
 ```

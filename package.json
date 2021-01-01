@@ -1,0 +1,16 @@
+{
+  "name": "taxi-protobuf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:vulpemventures/taxi-protobuf.git",
+  "author": "Vulpem Ventures Team",
+  "license": "MIT",
+  "dependencies": {
+    "grpc-web": "1.2.0"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.10.0",
+    "grpc_tools_node_protoc_ts": "^5.1.0",
+    "protoc-gen-grpc-web": "^1.2.1"
+  }
+}

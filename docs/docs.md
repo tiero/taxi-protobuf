@@ -57,7 +57,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | topup_id | [string](#string) |  | random identifier of the currer topup |
-| partial | [string](#string) |  | PSET signed with SIGHASH_ALL | ANYONECANPAY |
+| partial | [string](#string) |  | PSET signed with SIGHASH_SINGLE | ANYONECANPAY |
 | asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
 | asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
 | asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
@@ -115,7 +115,7 @@
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | ListAssets | [.ListAssetsRequest](#ListAssetsRequest) | [.ListAssetsReply](#ListAssetsReply) | ListAssets rpc returns a subset of supported elements assets that could be accepted as payment for topups |
-| TopupWithAsset | [.TopupWithAssetRequest](#TopupWithAssetRequest) | [.TopupWithAssetReply](#TopupWithAssetReply) | TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi. The transaction is signed with SIGHASH_ALL | ANYONECANPAY |
+| TopupWithAsset | [.TopupWithAssetRequest](#TopupWithAssetRequest) | [.TopupWithAssetReply](#TopupWithAssetReply) | TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi. The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY |
 
  
 

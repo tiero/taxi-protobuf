@@ -21,7 +21,7 @@ type TaxiClient interface {
 	// for topups
 	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (*ListAssetsReply, error)
 	// TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
-	// The transaction is signed with SIGHASH_ALL | ANYONECANPAY
+	// The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY
 	TopupWithAsset(ctx context.Context, in *TopupWithAssetRequest, opts ...grpc.CallOption) (*TopupWithAssetReply, error)
 }
 
@@ -59,7 +59,7 @@ type TaxiServer interface {
 	// for topups
 	ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsReply, error)
 	// TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
-	// The transaction is signed with SIGHASH_ALL | ANYONECANPAY
+	// The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY
 	TopupWithAsset(context.Context, *TopupWithAssetRequest) (*TopupWithAssetReply, error)
 	mustEmbedUnimplementedTaxiServer()
 }

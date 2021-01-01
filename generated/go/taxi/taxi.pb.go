@@ -234,7 +234,7 @@ type Topup struct {
 	unknownFields protoimpl.UnknownFields
 
 	TopupId     string  `protobuf:"bytes,1,opt,name=topup_id,json=topupId,proto3" json:"topup_id,omitempty"`              //random identifier of the currer topup
-	Partial     string  `protobuf:"bytes,2,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_ALL | ANYONECANPAY
+	Partial     string  `protobuf:"bytes,2,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
 	AssetHash   string  `protobuf:"bytes,3,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`        // the asset hash used as payout for bitcoin fees
 	AssetAmount uint64  `protobuf:"varint,4,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
 	AssetPrice  float32 `protobuf:"fixed32,5,opt,name=asset_price,json=assetPrice,proto3" json:"asset_price,omitempty"`   // the price of bitcoin expressed in asset

@@ -22,7 +22,8 @@ message TopupWithAssetRequest {
 message TopupWithAssetReply {
   Topup topup = 1;
   uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will provably be double-spent
-  string blinding_key = 3; // the hex encoded blinding private key of the locked LBTC input
+  string private_blinding_key = 3; // the hex encoded blinding private key of the locked LBTC input
+  string public_blinding_key = 4; // the hex encoded blinding public key of the pay to taxi output
 }
 
 message Topup {

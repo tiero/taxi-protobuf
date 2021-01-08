@@ -78,6 +78,7 @@
 | ----- | ---- | ----- | ----------- |
 | topup | [Topup](#Topup) |  |  |
 | expiry | [uint64](#uint64) |  | the unix timestamp after wich the locked LBTC input will provably be double-spent |
+| blinding_key | [string](#string) |  | the hex encoded blinding private key of the locked LBTC input |
 
 
 

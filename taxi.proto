@@ -12,7 +12,7 @@ service Taxi {
 
 message ListAssetsRequest {}
 message ListAssetsReply {
-  repeated string asset_hash = 1; // asset hash accepted as payout
+  repeated AssetDetails assets = 1; // all the assets available for topups
 }
 message TopupWithAssetRequest {
   string asset_hash = 1; // asset hash to be used for payout
@@ -27,10 +27,15 @@ message TopupWithAssetReply {
 }
 
 message Topup {
-  string topup_id = 1; //random identifier of the currer topup
+  string topup_id = 1; // random identifier of the current topup
   string partial = 2; // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-  float asset_price = 5; // the price of bitcoin expressed in asset
-  int32 basis_point = 6; // the spread expressed in basis point on top the amount needed to repay for bitcoin fees
+  uint64 asset_spread = 5; // the spread amount expressed in satoshis used to pay the taxi service fees
+}
+
+message AssetDetails {
+  string asset_hash = 1; // the asset hash used as identifier on the network
+  uint32 basis_point = 2; // the taxi service fee expressed in basis points for the given asset
+  float asset_price = 3; // the price = the amount of assets to equal 1 BTC
 }

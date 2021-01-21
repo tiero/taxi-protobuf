@@ -179,6 +179,10 @@
             <ul>
               
                 <li>
+                  <a href="#.AssetDetails"><span class="badge">M</span>AssetDetails</a>
+                </li>
+              
+                <li>
                   <a href="#.ListAssetsReply"><span class="badge">M</span>ListAssetsReply</a>
                 </li>
               
@@ -220,7 +224,7 @@
       <p></p>
 
       
-        <h3 id=".ListAssetsReply">ListAssetsReply</h3>
+        <h3 id=".AssetDetails">AssetDetails</h3>
         <p></p>
 
         
@@ -233,8 +237,46 @@
                 <tr>
                   <td>asset_hash</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the asset hash used as identifier on the network </p></td>
+                </tr>
+              
+                <tr>
+                  <td>basis_point</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>the taxi service fee expressed in basis points for the given asset </p></td>
+                </tr>
+              
+                <tr>
+                  <td>asset_price</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>the price = the amount of assets to equal 1 BTC </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id=".ListAssetsReply">ListAssetsReply</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>assets</td>
+                  <td><a href="#AssetDetails">AssetDetails</a></td>
                   <td>repeated</td>
-                  <td><p>asset hash accepted as payout </p></td>
+                  <td><p>all the assets available for topups </p></td>
                 </tr>
               
             </tbody>
@@ -265,7 +307,7 @@
                   <td>topup_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>random identifier of the currer topup </p></td>
+                  <td><p>random identifier of the current topup </p></td>
                 </tr>
               
                 <tr>
@@ -290,17 +332,10 @@
                 </tr>
               
                 <tr>
-                  <td>asset_price</td>
-                  <td><a href="#float">float</a></td>
+                  <td>asset_spread</td>
+                  <td><a href="#uint64">uint64</a></td>
                   <td></td>
-                  <td><p>the price of bitcoin expressed in asset </p></td>
-                </tr>
-              
-                <tr>
-                  <td>basis_point</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>the spread expressed in basis point on top the amount needed to repay for bitcoin fees </p></td>
+                  <td><p>the spread amount expressed in satoshis used to pay the taxi service fees </p></td>
                 </tr>
               
             </tbody>

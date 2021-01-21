@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [taxi.proto](#taxi.proto)
+    - [AssetDetails](#.AssetDetails)
     - [ListAssetsReply](#.ListAssetsReply)
     - [ListAssetsRequest](#.ListAssetsRequest)
     - [Topup](#.Topup)
@@ -23,6 +24,23 @@
 
 
 
+<a name=".AssetDetails"></a>
+
+### AssetDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| asset_hash | [string](#string) |  | the asset hash used as identifier on the network |
+| basis_point | [uint32](#uint32) |  | the taxi service fee expressed in basis points for the given asset |
+| asset_price | [float](#float) |  | the price = the amount of assets to equal 1 BTC |
+
+
+
+
+
+
 <a name=".ListAssetsReply"></a>
 
 ### ListAssetsReply
@@ -31,7 +49,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| asset_hash | [string](#string) | repeated | asset hash accepted as payout |
+| assets | [AssetDetails](#AssetDetails) | repeated | all the assets available for topups |
 
 
 
@@ -56,12 +74,11 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topup_id | [string](#string) |  | random identifier of the currer topup |
+| topup_id | [string](#string) |  | random identifier of the current topup |
 | partial | [string](#string) |  | PSET signed with SIGHASH_SINGLE | ANYONECANPAY |
 | asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
 | asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
-| asset_price | [float](#float) |  | the price of bitcoin expressed in asset |
-| basis_point | [int32](#int32) |  | the spread expressed in basis point on top the amount needed to repay for bitcoin fees |
+| asset_spread | [uint64](#uint64) |  | the spread amount expressed in satoshis used to pay the taxi service fees |
 
 
 

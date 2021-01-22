@@ -64,7 +64,7 @@ listAssets: {
     responseDeserialize: deserialize_ListAssetsReply,
   },
   // TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
-// The transaction is signed with SIGHASH_ALL | ANYONECANPAY 
+// The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY 
 topupWithAsset: {
     path: '/Taxi/TopupWithAsset',
     requestStream: false,

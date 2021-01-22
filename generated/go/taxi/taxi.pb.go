@@ -178,7 +178,7 @@ type TopupWithAssetReply struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Topup              *Topup `protobuf:"bytes,1,opt,name=topup,proto3" json:"topup,omitempty"`
+	Topup              *Topup `protobuf:"bytes,1,opt,name=topup,proto3" json:"topup,omitempty"`                                                       // The Topup message
 	Expiry             uint64 `protobuf:"varint,2,opt,name=expiry,proto3" json:"expiry,omitempty"`                                                    // the unix timestamp after wich the locked LBTC input will provably be double-spent
 	PrivateBlindingKey string `protobuf:"bytes,3,opt,name=private_blinding_key,json=privateBlindingKey,proto3" json:"private_blinding_key,omitempty"` // the hex encoded blinding private key of the locked LBTC input
 	PublicBlindingKey  string `protobuf:"bytes,4,opt,name=public_blinding_key,json=publicBlindingKey,proto3" json:"public_blinding_key,omitempty"`    // the hex encoded blinding public key of the pay to taxi output

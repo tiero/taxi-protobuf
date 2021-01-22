@@ -17,10 +17,10 @@ export namespace ListAssetsRequest {
 }
 
 export class ListAssetsReply extends jspb.Message {
-  getAssetHashList(): Array<string>;
-  setAssetHashList(value: Array<string>): ListAssetsReply;
-  clearAssetHashList(): ListAssetsReply;
-  addAssetHash(value: string, index?: number): ListAssetsReply;
+  getAssetsList(): Array<AssetDetails>;
+  setAssetsList(value: Array<AssetDetails>): ListAssetsReply;
+  clearAssetsList(): ListAssetsReply;
+  addAssets(value?: AssetDetails, index?: number): AssetDetails;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ListAssetsReply.AsObject;
@@ -32,7 +32,7 @@ export class ListAssetsReply extends jspb.Message {
 
 export namespace ListAssetsReply {
   export type AsObject = {
-    assetHashList: Array<string>,
+    assetsList: Array<AssetDetails.AsObject>,
   }
 }
 
@@ -71,6 +71,12 @@ export class TopupWithAssetReply extends jspb.Message {
   getExpiry(): number;
   setExpiry(value: number): TopupWithAssetReply;
 
+  getPrivateBlindingKey(): string;
+  setPrivateBlindingKey(value: string): TopupWithAssetReply;
+
+  getPublicBlindingKey(): string;
+  setPublicBlindingKey(value: string): TopupWithAssetReply;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): TopupWithAssetReply.AsObject;
   static toObject(includeInstance: boolean, msg: TopupWithAssetReply): TopupWithAssetReply.AsObject;
@@ -83,6 +89,8 @@ export namespace TopupWithAssetReply {
   export type AsObject = {
     topup?: Topup.AsObject,
     expiry: number,
+    privateBlindingKey: string,
+    publicBlindingKey: string,
   }
 }
 
@@ -99,11 +107,8 @@ export class Topup extends jspb.Message {
   getAssetAmount(): number;
   setAssetAmount(value: number): Topup;
 
-  getAssetPrice(): number;
-  setAssetPrice(value: number): Topup;
-
-  getBasisPoint(): number;
-  setBasisPoint(value: number): Topup;
+  getAssetSpread(): number;
+  setAssetSpread(value: number): Topup;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Topup.AsObject;
@@ -119,8 +124,33 @@ export namespace Topup {
     partial: string,
     assetHash: string,
     assetAmount: number,
-    assetPrice: number,
+    assetSpread: number,
+  }
+}
+
+export class AssetDetails extends jspb.Message {
+  getAssetHash(): string;
+  setAssetHash(value: string): AssetDetails;
+
+  getBasisPoint(): number;
+  setBasisPoint(value: number): AssetDetails;
+
+  getAssetPrice(): number;
+  setAssetPrice(value: number): AssetDetails;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AssetDetails.AsObject;
+  static toObject(includeInstance: boolean, msg: AssetDetails): AssetDetails.AsObject;
+  static serializeBinaryToWriter(message: AssetDetails, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AssetDetails;
+  static deserializeBinaryFromReader(message: AssetDetails, reader: jspb.BinaryReader): AssetDetails;
+}
+
+export namespace AssetDetails {
+  export type AsObject = {
+    assetHash: string,
     basisPoint: number,
+    assetPrice: number,
   }
 }
 

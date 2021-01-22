@@ -93,7 +93,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topup | [Topup](#Topup) |  |  |
+| topup | [Topup](#Topup) |  | The Topup message |
 | expiry | [uint64](#uint64) |  | the unix timestamp after wich the locked LBTC input will provably be double-spent |
 | private_blinding_key | [string](#string) |  | the hex encoded blinding private key of the locked LBTC input |
 | public_blinding_key | [string](#string) |  | the hex encoded blinding public key of the pay to taxi output |

@@ -18,6 +18,10 @@ jobs:
           go-version: ^1.15
         id: go
 
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "12"
+
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
 
@@ -32,8 +36,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Install grpc-js and grpc-web tools
+        run: yarn --check-files
+
       - name: Compile Go stubs
         run: make go
+
+      - name: Compile JS stubs
+        run: make js
 
       - name: Documentation
         run: make doc

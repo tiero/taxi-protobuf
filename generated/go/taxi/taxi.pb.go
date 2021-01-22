@@ -253,7 +253,7 @@ type Topup struct {
 	Partial     string `protobuf:"bytes,2,opt,name=partial,proto3" json:"partial,omitempty"`                             // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
 	AssetHash   string `protobuf:"bytes,3,opt,name=asset_hash,json=assetHash,proto3" json:"asset_hash,omitempty"`        // the asset hash used as payout for bitcoin fees
 	AssetAmount uint64 `protobuf:"varint,4,opt,name=asset_amount,json=assetAmount,proto3" json:"asset_amount,omitempty"` // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-	AssetSpread uint64 `protobuf:"varint,5,opt,name=asset_spread,json=assetSpread,proto3" json:"asset_spread,omitempty"` // the spread amount expressed in satoshis used to pay the taxi service fees
+	AssetSpread uint64 `protobuf:"varint,5,opt,name=asset_spread,json=assetSpread,proto3" json:"asset_spread,omitempty"` // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees
 }
 
 func (x *Topup) Reset() {

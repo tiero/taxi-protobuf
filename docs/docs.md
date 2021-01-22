@@ -78,7 +78,7 @@
 | partial | [string](#string) |  | PSET signed with SIGHASH_SINGLE | ANYONECANPAY |
 | asset_hash | [string](#string) |  | the asset hash used as payout for bitcoin fees |
 | asset_amount | [uint64](#uint64) |  | the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee |
-| asset_spread | [uint64](#uint64) |  | the spread amount expressed in satoshis used to pay the taxi service fees |
+| asset_spread | [uint64](#uint64) |  | the spread amount expressed in asset denominated satoshis used to pay the taxi service fees |
 
 
 

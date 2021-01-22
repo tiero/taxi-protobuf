@@ -31,7 +31,7 @@ message Topup {
   string partial = 2; // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-  uint64 asset_spread = 5; // the spread amount expressed in satoshis used to pay the taxi service fees
+  uint64 asset_spread = 5; // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees
 }
 
 message AssetDetails {

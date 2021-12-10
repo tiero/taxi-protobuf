@@ -19,20 +19,20 @@ jobs:
         id: go
 
       - uses: bufbuild/buf-setup-action@v0.6.0
-
+      
       - uses: arduino/setup-protoc@v1
-
-      - name: Install protoc go plugins
+  
+      - name: Install protoc grpc-gateway plugin
         run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
           go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
+
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - run: buf generate
+      - name: Generate
+        run: make buf
 
       - name: Documentation
         run: make doc

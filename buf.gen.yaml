@@ -1,16 +1,16 @@
 version: v1
 plugins:
-  - name: go
+  - remote: buf.build/protocolbuffers/plugins/go
     out: generated/go
     opt:
       - paths=source_relative
 
-  - name: go-grpc
+  - remote: buf.build/grpc/plugins/go
     out: generated/go
     opt:
       - paths=source_relative
 
-  - name: js
+  - remote: buf.build/protocolbuffers/plugins/js
     out: generated/js
     opt: import_style=commonjs,binary
 

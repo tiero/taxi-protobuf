@@ -7,20 +7,14 @@
 * Docker (for docgen)
 
 
-## Compile
+## Compile stubs
 
-Build for Go
+Build with [Buf](https://buf.build)
 
-```sh
-$ make go
+```bash
+# or with buf directly
+buf generate
 ```
-
-Build for JavaScript
-
-```sh
-$ make js
-```
-
 
 
 ## Documentation

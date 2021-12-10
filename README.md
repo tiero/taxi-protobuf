@@ -3,15 +3,14 @@
 
 ## Requirements
 
-* protoc
+* [Buf](https://buf.build)
 * Docker (for docgen)
 
 
 ## Compile stubs
 
-Build with [Buf](https://buf.build)
-
 ```bash
+make buf
 # or with buf directly
 buf generate
 ```

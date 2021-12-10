@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "taxi.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Taxi"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "taxiAssetDetails": {
+      "type": "object",
+      "properties": {
+        "assetHash": {
+          "type": "string"
+        },
+        "basisPoint": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "assetPrice": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "taxiListAssetsReply": {
+      "type": "object",
+      "properties": {
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/taxiAssetDetails"
+          }
+        }
+      }
+    },
+    "taxiTopup": {
+      "type": "object",
+      "properties": {
+        "topupId": {
+          "type": "string"
+        },
+        "partial": {
+          "type": "string"
+        },
+        "assetHash": {
+          "type": "string"
+        },
+        "assetAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "assetSpread": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "taxiTopupWithAssetReply": {
+      "type": "object",
+      "properties": {
+        "topup": {
+          "$ref": "#/definitions/taxiTopup"
+        },
+        "expiry": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "privateBlindingKey": {
+          "type": "string"
+        },
+        "publicBlindingKey": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

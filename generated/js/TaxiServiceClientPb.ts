@@ -1,5 +1,5 @@
 /**
- * @fileoverview gRPC-Web generated client stub for 
+ * @fileoverview gRPC-Web generated client stub for taxi
  * @enhanceable
  * @public
  */
@@ -36,7 +36,7 @@ export class TaxiClient {
   }
 
   methodInfoListAssets = new grpcWeb.MethodDescriptor(
-    '/Taxi/ListAssets',
+    '/taxi.Taxi/ListAssets',
     grpcWeb.MethodType.UNARY,
     taxi_pb.ListAssetsRequest,
     taxi_pb.ListAssetsReply,
@@ -64,7 +64,7 @@ export class TaxiClient {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/Taxi/ListAssets',
+          '/taxi.Taxi/ListAssets',
         request,
         metadata || {},
         this.methodInfoListAssets,
@@ -72,14 +72,14 @@ export class TaxiClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/Taxi/ListAssets',
+      '/taxi.Taxi/ListAssets',
     request,
     metadata || {},
     this.methodInfoListAssets);
   }
 
   methodInfoTopupWithAsset = new grpcWeb.MethodDescriptor(
-    '/Taxi/TopupWithAsset',
+    '/taxi.Taxi/TopupWithAsset',
     grpcWeb.MethodType.UNARY,
     taxi_pb.TopupWithAssetRequest,
     taxi_pb.TopupWithAssetReply,
@@ -107,7 +107,7 @@ export class TaxiClient {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/Taxi/TopupWithAsset',
+          '/taxi.Taxi/TopupWithAsset',
         request,
         metadata || {},
         this.methodInfoTopupWithAsset,
@@ -115,7 +115,7 @@ export class TaxiClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/Taxi/TopupWithAsset',
+      '/taxi.Taxi/TopupWithAsset',
     request,
     metadata || {},
     this.methodInfoTopupWithAsset);

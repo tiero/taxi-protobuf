@@ -179,34 +179,34 @@
             <ul>
               
                 <li>
-                  <a href="#.AssetDetails"><span class="badge">M</span>AssetDetails</a>
+                  <a href="#taxi.AssetDetails"><span class="badge">M</span>AssetDetails</a>
                 </li>
               
                 <li>
-                  <a href="#.ListAssetsReply"><span class="badge">M</span>ListAssetsReply</a>
+                  <a href="#taxi.ListAssetsReply"><span class="badge">M</span>ListAssetsReply</a>
                 </li>
               
                 <li>
-                  <a href="#.ListAssetsRequest"><span class="badge">M</span>ListAssetsRequest</a>
+                  <a href="#taxi.ListAssetsRequest"><span class="badge">M</span>ListAssetsRequest</a>
                 </li>
               
                 <li>
-                  <a href="#.Topup"><span class="badge">M</span>Topup</a>
+                  <a href="#taxi.Topup"><span class="badge">M</span>Topup</a>
                 </li>
               
                 <li>
-                  <a href="#.TopupWithAssetReply"><span class="badge">M</span>TopupWithAssetReply</a>
+                  <a href="#taxi.TopupWithAssetReply"><span class="badge">M</span>TopupWithAssetReply</a>
                 </li>
               
                 <li>
-                  <a href="#.TopupWithAssetRequest"><span class="badge">M</span>TopupWithAssetRequest</a>
+                  <a href="#taxi.TopupWithAssetRequest"><span class="badge">M</span>TopupWithAssetRequest</a>
                 </li>
               
               
               
               
                 <li>
-                  <a href="#.Taxi"><span class="badge">S</span>Taxi</a>
+                  <a href="#taxi.Taxi"><span class="badge">S</span>Taxi</a>
                 </li>
               
             </ul>
@@ -224,7 +224,7 @@
       <p></p>
 
       
-        <h3 id=".AssetDetails">AssetDetails</h3>
+        <h3 id="taxi.AssetDetails">AssetDetails</h3>
         <p></p>
 
         
@@ -262,7 +262,7 @@
 
         
       
-        <h3 id=".ListAssetsReply">ListAssetsReply</h3>
+        <h3 id="taxi.ListAssetsReply">ListAssetsReply</h3>
         <p></p>
 
         
@@ -274,7 +274,7 @@
               
                 <tr>
                   <td>assets</td>
-                  <td><a href="#AssetDetails">AssetDetails</a></td>
+                  <td><a href="#taxi.AssetDetails">AssetDetails</a></td>
                   <td>repeated</td>
                   <td><p>all the assets available for topups </p></td>
                 </tr>
@@ -286,14 +286,14 @@
 
         
       
-        <h3 id=".ListAssetsRequest">ListAssetsRequest</h3>
+        <h3 id="taxi.ListAssetsRequest">ListAssetsRequest</h3>
         <p></p>
 
         
 
         
       
-        <h3 id=".Topup">Topup</h3>
+        <h3 id="taxi.Topup">Topup</h3>
         <p></p>
 
         
@@ -345,7 +345,7 @@
 
         
       
-        <h3 id=".TopupWithAssetReply">TopupWithAssetReply</h3>
+        <h3 id="taxi.TopupWithAssetReply">TopupWithAssetReply</h3>
         <p></p>
 
         
@@ -357,7 +357,7 @@
               
                 <tr>
                   <td>topup</td>
-                  <td><a href="#Topup">Topup</a></td>
+                  <td><a href="#taxi.Topup">Topup</a></td>
                   <td></td>
                   <td><p>The Topup message </p></td>
                 </tr>
@@ -390,7 +390,7 @@
 
         
       
-        <h3 id=".TopupWithAssetRequest">TopupWithAssetRequest</h3>
+        <h3 id="taxi.TopupWithAssetRequest">TopupWithAssetRequest</h3>
         <p></p>
 
         
@@ -434,7 +434,7 @@
       
 
       
-        <h3 id=".Taxi">Taxi</h3>
+        <h3 id="taxi.Taxi">Taxi</h3>
         <p></p>
         <table class="enum-table">
           <thead>
@@ -444,16 +444,16 @@
             
               <tr>
                 <td>ListAssets</td>
-                <td><a href="#ListAssetsRequest">.ListAssetsRequest</a></td>
-                <td><a href="#ListAssetsReply">.ListAssetsReply</a></td>
+                <td><a href="#taxi.ListAssetsRequest">ListAssetsRequest</a></td>
+                <td><a href="#taxi.ListAssetsReply">ListAssetsReply</a></td>
                 <td><p>ListAssets rpc returns a subset of supported elements assets that could be accepted as payment
 for topups</p></td>
               </tr>
             
               <tr>
                 <td>TopupWithAsset</td>
-                <td><a href="#TopupWithAssetRequest">.TopupWithAssetRequest</a></td>
-                <td><a href="#TopupWithAssetReply">.TopupWithAssetReply</a></td>
+                <td><a href="#taxi.TopupWithAssetRequest">TopupWithAssetRequest</a></td>
+                <td><a href="#taxi.TopupWithAssetReply">TopupWithAssetReply</a></td>
                 <td><p>TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
 The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY</p></td>
               </tr>

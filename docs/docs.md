@@ -4,14 +4,14 @@
 ## Table of Contents
 
 - [taxi.proto](#taxi.proto)
-    - [AssetDetails](#.AssetDetails)
-    - [ListAssetsReply](#.ListAssetsReply)
-    - [ListAssetsRequest](#.ListAssetsRequest)
-    - [Topup](#.Topup)
-    - [TopupWithAssetReply](#.TopupWithAssetReply)
-    - [TopupWithAssetRequest](#.TopupWithAssetRequest)
+    - [AssetDetails](#taxi.AssetDetails)
+    - [ListAssetsReply](#taxi.ListAssetsReply)
+    - [ListAssetsRequest](#taxi.ListAssetsRequest)
+    - [Topup](#taxi.Topup)
+    - [TopupWithAssetReply](#taxi.TopupWithAssetReply)
+    - [TopupWithAssetRequest](#taxi.TopupWithAssetRequest)
   
-    - [Taxi](#.Taxi)
+    - [Taxi](#taxi.Taxi)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -24,7 +24,7 @@
 
 
 
-<a name=".AssetDetails"></a>
+<a name="taxi.AssetDetails"></a>
 
 ### AssetDetails
 
@@ -41,7 +41,7 @@
 
 
 
-<a name=".ListAssetsReply"></a>
+<a name="taxi.ListAssetsReply"></a>
 
 ### ListAssetsReply
 
@@ -49,14 +49,14 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| assets | [AssetDetails](#AssetDetails) | repeated | all the assets available for topups |
+| assets | [AssetDetails](#taxi.AssetDetails) | repeated | all the assets available for topups |
 
 
 
 
 
 
-<a name=".ListAssetsRequest"></a>
+<a name="taxi.ListAssetsRequest"></a>
 
 ### ListAssetsRequest
 
@@ -66,7 +66,7 @@
 
 
 
-<a name=".Topup"></a>
+<a name="taxi.Topup"></a>
 
 ### Topup
 
@@ -85,7 +85,7 @@
 
 
 
-<a name=".TopupWithAssetReply"></a>
+<a name="taxi.TopupWithAssetReply"></a>
 
 ### TopupWithAssetReply
 
@@ -93,7 +93,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topup | [Topup](#Topup) |  | The Topup message |
+| topup | [Topup](#taxi.Topup) |  | The Topup message |
 | expiry | [uint64](#uint64) |  | the unix timestamp after wich the locked LBTC input will provably be double-spent |
 | private_blinding_key | [string](#string) |  | the hex encoded blinding private key of the locked LBTC input |
 | public_blinding_key | [string](#string) |  | the hex encoded blinding public key of the pay to taxi output |
@@ -103,7 +103,7 @@
 
 
 
-<a name=".TopupWithAssetRequest"></a>
+<a name="taxi.TopupWithAssetRequest"></a>
 
 ### TopupWithAssetRequest
 
@@ -126,15 +126,15 @@
  
 
 
-<a name=".Taxi"></a>
+<a name="taxi.Taxi"></a>
 
 ### Taxi
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| ListAssets | [.ListAssetsRequest](#ListAssetsRequest) | [.ListAssetsReply](#ListAssetsReply) | ListAssets rpc returns a subset of supported elements assets that could be accepted as payment for topups |
-| TopupWithAsset | [.TopupWithAssetRequest](#TopupWithAssetRequest) | [.TopupWithAssetReply](#TopupWithAssetReply) | TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi. The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY |
+| ListAssets | [ListAssetsRequest](#taxi.ListAssetsRequest) | [ListAssetsReply](#taxi.ListAssetsReply) | ListAssets rpc returns a subset of supported elements assets that could be accepted as payment for topups |
+| TopupWithAsset | [TopupWithAssetRequest](#taxi.TopupWithAssetRequest) | [TopupWithAssetReply](#taxi.TopupWithAssetReply) | TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi. The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY |
 
  
 

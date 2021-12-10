@@ -11,7 +11,8 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+// Requires gRPC-Go v1.32.0 or later.
+const _ = grpc.SupportPackageIsVersion7
 
 // TaxiClient is the client API for Taxi service.
 //
@@ -68,16 +69,23 @@ type TaxiServer interface {
 type UnimplementedTaxiServer struct {
 }
 
-func (*UnimplementedTaxiServer) ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsReply, error) {
+func (UnimplementedTaxiServer) ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAssets not implemented")
 }
-func (*UnimplementedTaxiServer) TopupWithAsset(context.Context, *TopupWithAssetRequest) (*TopupWithAssetReply, error) {
+func (UnimplementedTaxiServer) TopupWithAsset(context.Context, *TopupWithAssetRequest) (*TopupWithAssetReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TopupWithAsset not implemented")
 }
-func (*UnimplementedTaxiServer) mustEmbedUnimplementedTaxiServer() {}
+func (UnimplementedTaxiServer) mustEmbedUnimplementedTaxiServer() {}
 
-func RegisterTaxiServer(s *grpc.Server, srv TaxiServer) {
-	s.RegisterService(&_Taxi_serviceDesc, srv)
+// UnsafeTaxiServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TaxiServer will
+// result in compilation errors.
+type UnsafeTaxiServer interface {
+	mustEmbedUnimplementedTaxiServer()
+}
+
+func RegisterTaxiServer(s grpc.ServiceRegistrar, srv TaxiServer) {
+	s.RegisterService(&Taxi_ServiceDesc, srv)
 }
 
 func _Taxi_ListAssets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -116,7 +124,10 @@ func _Taxi_TopupWithAsset_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Taxi_serviceDesc = grpc.ServiceDesc{
+// Taxi_ServiceDesc is the grpc.ServiceDesc for Taxi service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Taxi_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Taxi",
 	HandlerType: (*TaxiServer)(nil),
 	Methods: []grpc.MethodDesc{

@@ -1,0 +1,21 @@
+version: v1
+plugins:
+  - name: go
+    out: generated/go
+    opt:
+      - paths=source_relative
+
+  - name: go-grpc
+    out: generated/go
+    opt:
+      - paths=source_relative
+
+  - name: js
+    out: generated/js
+    opt: import_style=commonjs,binary
+
+  - name: grpc-gateway
+    out: generated/go
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true

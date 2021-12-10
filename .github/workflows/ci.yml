@@ -12,39 +12,21 @@ jobs:
 
     # Install dependencies
     steps:
-      - name: Set up Go 1.15.x
+      - name: Set up Go 1.17.x
         uses: actions/setup-go@v2
         with:
-          go-version: ^1.15
+          go-version: ^1.17
         id: go
 
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: "12"
+      - uses: bufbuild/buf-setup-action@v0.6.0
 
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v1
-
-      - name: Install protoc-gen-go and protoc-gen-go-grpc
-        run: |
-          export GO111MODULE=on
-          go get google.golang.org/protobuf/cmd/protoc-gen-go
-          git clone -b v1.31.0 https://github.com/grpc/grpc-go
-          cd grpc-go/cmd/protoc-gen-go-grpc
-          go install .
+      - uses: arduino/setup-protoc@v1
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Install grpc-js and grpc-web tools
-        run: yarn --check-files
-
-      - name: Compile Go stubs
-        run: make go
-
-      - name: Compile JS stubs
-        run: make js
-
+      - run: buf generate
+      
       - name: Documentation
         run: make doc
 

@@ -14,7 +14,7 @@ plugins:
     out: generated/js
     opt: import_style=commonjs,binary
 
-  - name: grpc-web
+  - remote: https://buf.build/grpc/plugins/web
     out: generated/js
     opt: import_style=typescript,mode=grpcwebtext
 

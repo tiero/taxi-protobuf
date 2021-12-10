@@ -1,5 +1,6 @@
 syntax = "proto3";
-option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/trade";
+package taxi;
+option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/taxi";
 
 service Taxi {
   // ListAssets rpc returns a subset of supported elements assets that could be accepted as payment

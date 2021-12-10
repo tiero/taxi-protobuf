@@ -2,13 +2,24 @@ syntax = "proto3";
 package taxi;
 option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/taxi";
 
+import "google/api/annotations.proto";
+
 service Taxi {
   // ListAssets rpc returns a subset of supported elements assets that could be accepted as payment
   // for topups
-  rpc ListAssets(ListAssetsRequest) returns (ListAssetsReply);
+  rpc ListAssets(ListAssetsRequest) returns (ListAssetsReply) {
+    option (google.api.http) = {
+      get: "/v1/assets"
+    };
+  };;
   // TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.
   // The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY 
-  rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetReply);
+  rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetReply) {
+    option (google.api.http) = {
+      post: "/v1/asset/topup"
+      body: "*"
+    };
+  };
 }
 
 message ListAssetsRequest {}

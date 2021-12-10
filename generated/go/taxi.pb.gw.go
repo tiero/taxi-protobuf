@@ -2,11 +2,11 @@
 // source: taxi.proto
 
 /*
-Package trade is a reverse proxy.
+Package taxi is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package trade
+package taxi
 
 import (
 	"context"
@@ -35,14 +35,6 @@ func request_Taxi_ListAssets_0(ctx context.Context, marshaler runtime.Marshaler,
 	var protoReq ListAssetsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
 	msg, err := client.ListAssets(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -51,14 +43,6 @@ func request_Taxi_ListAssets_0(ctx context.Context, marshaler runtime.Marshaler,
 func local_request_Taxi_ListAssets_0(ctx context.Context, marshaler runtime.Marshaler, server TaxiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListAssetsRequest
 	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := server.ListAssets(ctx, &protoReq)
 	return msg, metadata, err
@@ -105,13 +89,13 @@ func local_request_Taxi_TopupWithAsset_0(ctx context.Context, marshaler runtime.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTaxiHandlerFromEndpoint instead.
 func RegisterTaxiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TaxiServer) error {
 
-	mux.Handle("POST", pattern_Taxi_ListAssets_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Taxi_ListAssets_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/.Taxi/ListAssets", runtime.WithHTTPPathPattern("/Taxi/ListAssets"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/taxi.Taxi/ListAssets", runtime.WithHTTPPathPattern("/v1/assets"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -134,7 +118,7 @@ func RegisterTaxiHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/.Taxi/TopupWithAsset", runtime.WithHTTPPathPattern("/Taxi/TopupWithAsset"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/taxi.Taxi/TopupWithAsset", runtime.WithHTTPPathPattern("/v1/asset/topup"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -192,11 +176,11 @@ func RegisterTaxiHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.
 // "TaxiClient" to call the correct interceptors.
 func RegisterTaxiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TaxiClient) error {
 
-	mux.Handle("POST", pattern_Taxi_ListAssets_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Taxi_ListAssets_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/.Taxi/ListAssets", runtime.WithHTTPPathPattern("/Taxi/ListAssets"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/taxi.Taxi/ListAssets", runtime.WithHTTPPathPattern("/v1/assets"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -216,7 +200,7 @@ func RegisterTaxiHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/.Taxi/TopupWithAsset", runtime.WithHTTPPathPattern("/Taxi/TopupWithAsset"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/taxi.Taxi/TopupWithAsset", runtime.WithHTTPPathPattern("/v1/asset/topup"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -236,9 +220,9 @@ func RegisterTaxiHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 }
 
 var (
-	pattern_Taxi_ListAssets_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"Taxi", "ListAssets"}, ""))
+	pattern_Taxi_ListAssets_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "assets"}, ""))
 
-	pattern_Taxi_TopupWithAsset_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"Taxi", "TopupWithAsset"}, ""))
+	pattern_Taxi_TopupWithAsset_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "asset", "topup"}, ""))
 )
 
 var (

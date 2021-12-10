@@ -18,7 +18,7 @@
   "paths": {
     "/v1/asset/topup": {
       "post": {
-        "summary": "TopupWithAsset rpc returns the a partial signed elements transaction with a LBTC input (eventual change) and a asset denominated output as payout fot the taxi.\nThe transaction is signed with SIGHASH_SINGLE | ANYONECANPAY",
+        "summary": "TopupWithAsset rpc returns a transaction (pset) with a LBTC input and a payout with defined asset fot taxi.\nThe transaction is signed with SIGHASH_SINGLE | ANYONECANPAY",
         "operationId": "Taxi_TopupWithAsset",
         "responses": {
           "200": {

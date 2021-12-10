@@ -26,9 +26,6 @@ jobs:
       - name: Generate
         run: make buf
 
-      - name: Documentation
-        run: make doc
-
       - name: Commit generated stubs
         run: |
           git config --local user.email "$(git log --format='%ae' HEAD^!)"

@@ -7,7 +7,7 @@
 * Docker (for docgen)
 
 
-## Compile stubs
+## Compile
 
 ```bash
 make buf
@@ -15,16 +15,7 @@ make buf
 buf generate
 ```
 
-
-## Documentation
-
-Automatically generate HTML and Markdown documentation (Docker running is required)
-
-```sh
-$ make doc
-```
-
-## Usage
+## Install
 
 ### Go 
 

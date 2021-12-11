@@ -12,7 +12,7 @@ service Taxi {
     option (google.api.http) = {
       get: "/v1/assets"
     };
-  };;
+  }
   // TopupWithAsset rpc returns a transaction (pset) with a LBTC input and a payout with defined asset fot taxi.
   // The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY 
   rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetReply) {
@@ -20,7 +20,7 @@ service Taxi {
       post: "/v1/asset/topup"
       body: "*"
     };
-  };
+  }
 }
 
 message ListAssetsRequest {}

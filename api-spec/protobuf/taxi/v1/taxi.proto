@@ -26,10 +26,11 @@ message ListAssetsRequest {}
 message ListAssetsResponse {
   repeated AssetDetails assets = 1; // all the assets available for topups
 }
+
 message TopupWithAssetRequest {
   string asset_hash = 1; // asset hash to be used for payout
-  uint64 fee_amount = 2; // amount in satoshis of bitcoin needed to cover the fees. It's up to the client to estimate and ask the precise amount
-  uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
+  uint64 estimated_tx_size = 2; // the estimated tx size to cover network fees for
+  uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte = 100 mSats/byte
 }
 message TopupWithAssetResponse {
   Topup topup = 1; // The Topup message 

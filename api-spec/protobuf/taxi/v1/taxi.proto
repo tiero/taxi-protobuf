@@ -20,6 +20,15 @@ service TaxiService {
       body: "*"
     };
   }
+
+  // TopupWithKnownPayout adds ins and outs to the given transaction if this contains at least one
+  // known payout, ie. one output with a "whitelisted" script.
+  rpc TopupWithKnownPayout(TopupWithKnownPayoutRequest) returns (TopupWithKnownPayoutResponse) {
+    option (google.api.http) = {
+      post: "/v1/payout/topup"
+      body: "*"
+    };
+  }
 }
 
 message ListAssetsRequest {}
@@ -33,18 +42,25 @@ message TopupWithAssetRequest {
   uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte = 100 mSats/byte
 }
 message TopupWithAssetResponse {
-  Topup topup = 1; // The Topup message 
-  uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will provably be double-spent
-  string private_blinding_key = 3; // the hex encoded blinding private key of the locked LBTC input
-  string public_blinding_key = 4; // the hex encoded blinding public key of the pay to taxi output
-}
-
-message Topup {
-  string topup_id = 1; // random identifier of the current topup
-  string partial = 2; // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
+  Topup topup = 1; // the Topup message 
+  uint64 expiry = 2; // the unix timestamp of the topup expiration date. After that date, the taxi sends the locked utxos to itself to prevent being spent by others
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
   uint64 asset_spread = 5; // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees
+}
+
+message TopupWithKnownPayoutRequest {
+  string partial = 1; // transaction in base64 format including the known payout
+  uint64 millisat_per_byte = 2; // how many millisatoshi per byte we want to spend
+}
+message TopupWithKnownPayoutResponse {
+  Topup topup = 1;
+  uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will be double-spent
+}
+
+message Topup {
+  string topup_id = 1;
+  string partial = 2;
 }
 
 message AssetDetails {

@@ -1,5 +1,5 @@
-.PHONY: buf doc
+.PHONY: proto
 
-buf:
-	buf generate
-	
+proto:
+	@echo "Compiling stubs..."
+	@buf generate

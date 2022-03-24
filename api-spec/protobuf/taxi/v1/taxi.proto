@@ -48,7 +48,7 @@ message TopupWithAssetResponse {
 
 message TopupWithKnownPayoutRequest {
   string partial = 1; // transaction in base64 format including the known payout
-  uint64 millisat_per_byte = 2; // ow many millisatoshi per byte we want to spend
+  uint64 millisat_per_byte = 2; // how many millisatoshi per byte we want to spend
 }
 message TopupWithKnownPayoutResponse {
   Topup topup = 1; // the Topup message 

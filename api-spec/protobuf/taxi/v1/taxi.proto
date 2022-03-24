@@ -44,6 +44,9 @@ message TopupWithAssetRequest {
 message TopupWithAssetResponse {
   Topup topup = 1; // the Topup message 
   uint64 expiry = 2; // the unix timestamp of the topup expiration date. After that date, the taxi sends the locked utxos to itself to prevent being spent by others
+  string asset_hash = 3; // the asset hash used as payout for bitcoin fees
+  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
+  uint64 asset_spread = 5; // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees
 }
 
 message TopupWithKnownPayoutRequest {
@@ -51,20 +54,13 @@ message TopupWithKnownPayoutRequest {
   uint64 millisat_per_byte = 2; // how many millisatoshi per byte we want to spend
 }
 message TopupWithKnownPayoutResponse {
-  TopupInfo topup = 1;
+  Topup topup = 1;
   uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will be double-spent
 }
 
-message TopupInfo {
+message Topup {
   string topup_id = 1;
   string partial = 2;
-}
-
-message Topup {
-  TopupInfo info = 1;
-  string asset_hash = 3; // the asset hash used as payout for bitcoin fees
-  uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
-  uint64 asset_spread = 5; // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees
 }
 
 message AssetDetails {

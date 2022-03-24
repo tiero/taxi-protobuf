@@ -1,7 +1,6 @@
 syntax = "proto3";
 
-package taxi;
-option go_package = "github.com/vulpemventures/taxi-protobuf/generated/go/taxi";
+package taxi.v1;
 
 import "google/api/annotations.proto";
 

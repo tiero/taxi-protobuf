@@ -1,16 +1,13 @@
-name: Compile protobuf stubs & push protos to buf.build registry
+name: Push protos to BSR (Buf Schema Registry)
 
 on:
   push:
     branches: [v1]
 
 jobs:
-  # This workflow contains a single job called "compile"
-  compile:
-    # The type of runner that the job will run on
+  publish:
     runs-on: ubuntu-latest
 
-    # Install dependencies
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
@@ -29,18 +26,9 @@ jobs:
           version: 1.1.0
 
       - name: Generate stubs
-        run: make proto
+        run: make proto-lint
 
       - uses: bufbuild/buf-push-action@v1        
         with:          
           input: api-spec/protobuf
           buf_token: ${{ secrets.BUF_TOKEN }}
-
-      - name: Commit generated stubs
-        continue-on-error: true
-        run: |
-          git config --local user.email "$(git log --format='%ae' HEAD^!)"
-          git config --local user.name "$(git log --format='%an' HEAD^!)"
-          git add -A
-          git commit -m "Automated: Update protobuf stubs"
-          git push origin v1

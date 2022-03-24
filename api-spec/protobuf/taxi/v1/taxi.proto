@@ -4,17 +4,17 @@ package taxi.v1;
 
 import "google/api/annotations.proto";
 
-service Taxi {
+service TaxiService {
   // ListAssets rpc returns a subset of supported elements assets that could be accepted as payment
   // for topups
-  rpc ListAssets(ListAssetsRequest) returns (ListAssetsReply) {
+  rpc ListAssets(ListAssetsRequest) returns (ListAssetsResponse) {
     option (google.api.http) = {
       get: "/v1/assets"
     };
   }
   // TopupWithAsset rpc returns a transaction (pset) with a LBTC input and a payout with defined asset fot taxi.
   // The transaction is signed with SIGHASH_SINGLE | ANYONECANPAY 
-  rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetReply) {
+  rpc TopupWithAsset(TopupWithAssetRequest) returns (TopupWithAssetResponse) {
     option (google.api.http) = {
       post: "/v1/asset/topup"
       body: "*"
@@ -23,7 +23,7 @@ service Taxi {
 }
 
 message ListAssetsRequest {}
-message ListAssetsReply {
+message ListAssetsResponse {
   repeated AssetDetails assets = 1; // all the assets available for topups
 }
 message TopupWithAssetRequest {
@@ -31,7 +31,7 @@ message TopupWithAssetRequest {
   uint64 fee_amount = 2; // amount in satoshis of bitcoin needed to cover the fees. It's up to the client to estimate and ask the precise amount
   uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte is 100
 }
-message TopupWithAssetReply {
+message TopupWithAssetResponse {
   Topup topup = 1; // The Topup message 
   uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will provably be double-spent
   string private_blinding_key = 3; // the hex encoded blinding private key of the locked LBTC input

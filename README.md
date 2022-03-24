@@ -10,7 +10,7 @@
 ## Compile
 
 ```bash
-make buf
+make proto
 # or with buf directly
 buf generate
 ```

@@ -1,11 +1,11 @@
-name: Ensure protos are linted
+name: Push protos to BSR (Buf Schema Registry)
 
 on:
-  pull_request:
+  push:
     branches: [v1]
 
 jobs:
-  lint:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,8 @@ jobs:
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+        with:
+          ref: v1
 
       - name: Setup build.buf
         uses: bufbuild/buf-setup-action@v1.1.0
@@ -25,3 +27,8 @@ jobs:
 
       - name: Generate stubs
         run: make proto-lint
+
+      - uses: bufbuild/buf-push-action@v1        
+        with:          
+          input: api-spec/protobuf
+          buf_token: ${{ secrets.BUF_TOKEN }}

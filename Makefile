@@ -1,5 +1,5 @@
-.PHONY: buf doc
+.PHONY: proto-lint
 
-buf:
-	buf generate
-	
+proto-lint:
+	@echo "Linting..."
+	@buf lint

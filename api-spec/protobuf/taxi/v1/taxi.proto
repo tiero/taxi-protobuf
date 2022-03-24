@@ -20,6 +20,15 @@ service TaxiService {
       body: "*"
     };
   }
+
+  // TopupWithKnownPayout adds ins and outs to the given transaction if this contains at least one
+  // known payout, ie. one output with a "whitelisted" script.
+  rpc TopupWithKnownPayout(TopupWithKnownPayoutRequest) returns (TopupWithKnownPayoutResponse) {
+    option (google.api.http) = {
+      post: "/v1/payout/topup"
+      body: "*"
+    };
+  }
 }
 
 message ListAssetsRequest {}
@@ -33,10 +42,17 @@ message TopupWithAssetRequest {
   uint64 millisat_per_byte = 3; // how many millisatoshi per byte we want to spend. ie. 0.1 sat/byte = 100 mSats/byte
 }
 message TopupWithAssetResponse {
-  Topup topup = 1; // The Topup message 
-  uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will provably be double-spent
-  string private_blinding_key = 3; // the hex encoded blinding private key of the locked LBTC input
-  string public_blinding_key = 4; // the hex encoded blinding public key of the pay to taxi output
+  Topup topup = 1; // the Topup message 
+  uint64 expiry = 2; // the unix timestamp of the topup expiration date. After that date, the taxi sends the locked utxos to itself to prevent being spent by others
+}
+
+message TopupWithKnownPayoutRequest {
+  string partial = 1; // transaction in base64 format including the known payout
+  uint64 millisat_per_byte = 2; // ow many millisatoshi per byte we want to spend
+}
+message TopupWithKnownPayoutResponse {
+  Topup topup = 1; // the Topup message 
+  uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will be double-spent
 }
 
 message Topup {

@@ -14,7 +14,7 @@ jobs:
         with:
           version: 1.1.0
 
-      - name: Generate stubs
+      - name: Lint protos
         run: make proto-lint
 
       - uses: bufbuild/buf-push-action@v1        

@@ -51,13 +51,17 @@ message TopupWithKnownPayoutRequest {
   uint64 millisat_per_byte = 2; // how many millisatoshi per byte we want to spend
 }
 message TopupWithKnownPayoutResponse {
-  Topup topup = 1; // the Topup message 
+  TopupInfo topup = 1;
   uint64 expiry = 2; // the unix timestamp after wich the locked LBTC input will be double-spent
 }
 
+message TopupInfo {
+  string topup_id = 1;
+  string partial = 2;
+}
+
 message Topup {
-  string topup_id = 1; // random identifier of the current topup
-  string partial = 2; // PSET signed with SIGHASH_SINGLE | ANYONECANPAY
+  TopupInfo info = 1;
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
   uint64 asset_spread = 5; // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees

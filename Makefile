@@ -1,9 +1,5 @@
-.PHONY: proto-lint proto
+.PHONY: proto-lint
 
 proto-lint:
 	@echo "Linting..."
 	@buf lint
-
-proto: proto-lint
-	@echo "Compiling stubs..."
-	@buf generate

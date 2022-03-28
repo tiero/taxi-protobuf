@@ -27,7 +27,7 @@ message TopupDetails {
 message AssetDetails {
   string asset_hash = 1; // the asset hash used as identifier on the network
   uint32 basis_point = 2; // the taxi service fee expressed in basis points for the given asset
-  float asset_price = 3; // the price = the amount of assets to equal 1 BTC
+  double asset_price = 3; // the price = the amount of assets to equal 1 BTC
 }
 
 message Timestamps {

@@ -5,6 +5,8 @@ deps:
 lint:
   use:
     - DEFAULT
+  except:
+    - ENUM_ZERO_VALUE_SUFFIX
 breaking:
   use:
     - FILE

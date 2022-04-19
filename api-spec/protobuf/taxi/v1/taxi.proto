@@ -47,6 +47,7 @@ message TopupWithAssetResponse {
   string asset_hash = 3; // the asset hash used as payout for bitcoin fees
   uint64 asset_amount = 4; // the asset denominated amount expressed in satoshis to be used as payout. It includes also the spread as taxi service fee
   uint64 asset_spread = 5; // the spread amount expressed in asset denominated satoshis used to pay the taxi service fees
+  repeated BlindingData in_blinding_data = 6; // Taxi's inputs revealed data in case of confidential inputs
 }
 
 message TopupWithKnownPayoutRequest {
@@ -67,4 +68,11 @@ message AssetDetails {
   string asset_hash = 1; // the asset hash used as identifier on the network
   uint32 basis_point = 2; // the taxi service fee expressed in basis points for the given asset
   double asset_price = 3; // the price = the amount of assets to equal 1 BTC
+}
+
+message BlindingData {
+  string asset = 1;
+  uint64 value = 2;
+  bytes asset_blinder = 3;
+  bytes value_blinder = 4;
 }

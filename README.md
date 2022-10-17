@@ -1,32 +1,5 @@
 # taxi-protobuf
 📃 Protocol Buffers schema specification for Liquid Taxi
 
-## Requirements
-
-* [Buf](https://buf.build)
-* Docker (for docgen)
-
-
-## Compile
-
-```bash
-make proto
-# or with buf directly
-buf generate
-```
-
-## Install
-
-### Go 
-
-```sh
-$ go get github.com/vulpemventures/taxi-protobuf
-```
-
-### JavaScript 
-
-```sh
-$ npm i vulpemventures/taxi-protobuf
-# or with yarn
-$ yarn add vulpemventures/taxi-protobuf
-```
+* [Protobuf](./api-spec/protobuf/taxi/v1/)
+* [Swagger](./api-spec/openapi/swagger/taxi/v1/)

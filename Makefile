@@ -1,5 +1,7 @@
-.PHONY: proto-lint
+.PHONY: proto-lint swagger
 
 proto-lint:
-	@echo "Linting..."
 	@buf lint
+
+swagger: proto-lint
+	@buf generate

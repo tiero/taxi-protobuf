@@ -53,10 +53,18 @@ message TopupWithAssetResponse {
 message TopupWithKnownPayoutRequest {
   string partial = 1; // transaction in base64 format including the known payout
   uint64 millisat_per_byte = 2; // how many millisatoshi per byte we want to spend
+  UnblindedInput unblinded_input = 3; // Users input revealed data in case of confidential inputs, used to blind users output
 }
 message TopupWithKnownPayoutResponse {
   Topup topup = 1; // the Topup message
   int64 expiry = 2; // the unix timestamp after wich the locked LBTC input will be double-spent
+}
+message UnblindedInput {
+  uint32 index = 1;
+  string asset = 2;
+  uint64 amount = 3;
+  string asset_blinder = 4;
+  string amount_blinder = 5;
 }
 
 message Topup {
